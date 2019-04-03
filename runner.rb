@@ -1,7 +1,7 @@
 require './lib/stat_tracker'
 
 game_path = './data/sample/game_sample.csv'
-team_path = './data/sample/team_info_sample.csv'
+team_path = './data/actual/team_info.csv'
 game_teams_path = './data/sample/game_teams_stats_sample.csv'
 
 locations = {
@@ -10,8 +10,6 @@ locations = {
   game_teams: game_teams_path
 }
 
-stat_tracker = StatTracker.new
-
-stat_tracker.from_csv(locations)
+stat_tracker = StatTracker.from_csv(locations)
 
 require 'pry'; binding.pry
