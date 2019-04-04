@@ -4,7 +4,8 @@ class Team
               :shortname,
               :teamname,
               :abbreviation,
-              :link
+              :link,
+              :games
   def initialize(info)
     @id = info[:team_id]
     @franchiseid = info[:franchiseid]
@@ -12,6 +13,11 @@ class Team
     @teamname = info[:teamname]
     @abbreviation = info[:abbreviation]
     @link = info[:link]
+    @games = []
+  end
+
+  def add(game)
+    @games << game
   end
 
 

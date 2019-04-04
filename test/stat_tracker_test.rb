@@ -6,7 +6,7 @@ class StatTrackerTest < Minitest::Test
 
   def setup
     game_path       = './data/sample/game_sample.csv'
-    team_path       = './data/actual/team_info.csv'
+    team_path       = './data/sample/team_info_sample.csv'
     game_teams_path = './data/sample/game_teams_stats_sample.csv'
 
     locations = {
@@ -30,26 +30,28 @@ class StatTrackerTest < Minitest::Test
     @stat_tracker.teams.each{|team| assert_instance_of(Team, team)}
   end
 
+  #IT2
+
   def test_returns_highest_total_score
     assert_equal 7, @stat_tracker.highest_total_score
   end
-  #
+
   def test_returns_lowest_total_score
     assert_equal 1, @stat_tracker.lowest_total_score
   end
-  #
+
   def test_returns_biggest_blowout
     assert_equal 5, @stat_tracker.biggest_blowout
   end
-  #
+
   def test_returns_percentage_home_wins
     assert_equal 0.5, @stat_tracker.percentage_home_wins
   end
-  #
+
   def test_returns_percentage_away_wins
     assert_equal 0.5, @stat_tracker.percentage_away_wins
   end
-  #
+
   def test_returns_count_of_game_by_season
     expected = {
       '20122013' => 4,
@@ -57,11 +59,11 @@ class StatTrackerTest < Minitest::Test
     }
     assert_equal expected, @stat_tracker.count_of_games_by_season
   end
-  #
+
   def test_returns_average_goals_per_game
     assert_equal 4.38, @stat_tracker.average_goals_per_game
   end
-  #
+
   def test_returns_average_goals_by_season
     expected = {
       '20122013' => 5.5,
@@ -69,25 +71,27 @@ class StatTrackerTest < Minitest::Test
     }
     assert_equal expected, @stat_tracker.average_goals_by_season
   end
-  #
-  # def test_returns_count_of_teams
-  #   assert_equal 33, @stat_tracker.count_of_teams
-  # end
-  #
-  # def test_returns_best_offense
-  #   assert_equal "Lightning", @stat_tracker.best_offense
-  # end
-  #
-  # def test_returns_worst_offense
-  #   assert_equal "Wild", @stat_tracker.worst_offense
-  # end
-  #
+
+  #IT3
+
+  def test_returns_count_of_teams
+    assert_equal 4, @stat_tracker.count_of_teams
+  end
+
+  def test_returns_best_offense
+    assert_equal "Bruins", @stat_tracker.best_offense
+  end
+
+  def test_returns_worst_offense
+    assert_equal "Flyers", @stat_tracker.worst_offense
+  end
+
   # def test_returns_best_defense
-  #   assert_equal "Stars", @stat_tracker.best_defense
+  #   assert_equal "Capitals", @stat_tracker.best_defense
   # end
-  #
+  # 
   # def test_returns_worst_defense
-  #   assert_equal "Lightning", @stat_tracker.worst_defense
+  #   assert_equal "Rangers", @stat_tracker.worst_defense
   # end
   #
   # def test_returns_highest_scoring_visitor
