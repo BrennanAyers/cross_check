@@ -35,7 +35,7 @@ class StatTrackerTest < Minitest::Test
   def test_returns_highest_total_score
     assert_equal 7, @stat_tracker.highest_total_score
   end
-  
+
   def test_returns_lowest_total_score
     assert_equal 1, @stat_tracker.lowest_total_score
   end
@@ -73,11 +73,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   #IT3
-  #
-  # def test_returns_count_of_teams
-  #   assert_equal 33, @stat_tracker.count_of_teams
-  # end
-  #
+
+  def test_returns_count_of_teams
+    assert_equal 32, @stat_tracker.count_of_teams
+  end
+
   # def test_returns_best_offense
   #   assert_equal "Lightning", @stat_tracker.best_offense
   # end

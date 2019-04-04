@@ -23,6 +23,10 @@ class StatTracker
 
   def generate_teams(teams_table)
     @teams = teams_table.map{|team_info| Team.new(team_info)}
+    @teams.each do |team|
+      @game_teams.each{|game|team.add(game) if game.team_id == team.id}
+    end
+
   end
 
   def generate_game_teams(game_teams_table)
@@ -83,7 +87,11 @@ class StatTracker
 #It3
 
   def count_of_teams
-    @teams.sum
+    @teams.count
   end
+
+  # def best_offense
+  #   best_team = @game_teams.max_by{|
+  # end
 
 end
