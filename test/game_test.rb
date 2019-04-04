@@ -13,7 +13,7 @@ class GameTest < Minitest::Test
 
   def test_has_correct_information
     assert_equal 2012030221, @game.id
-    assert_equal 20122013, @game.season
+    assert_equal '20122013', @game.season
     assert_equal "P", @game.type
     assert_equal "2013-05-16", @game.date_time
     assert_equal 3, @game.away_team_id

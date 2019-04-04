@@ -48,10 +48,10 @@ class StatTracker
   def count_of_games_by_season
     hash = {}
     @games.each do |game|
-      unless hash.keys.include?(game.season.to_s)
-        hash[game.season.to_s] = 1
+      unless hash.keys.include?(game.season)
+        hash[game.season] = 1
       else
-        hash[game.season.to_s] +=1
+        hash[game.season] +=1
       end
     end
     hash
@@ -64,4 +64,15 @@ class StatTracker
     total_score.fdiv(@games.length).round(2)
   end
 
+  def average_goals_by_season
+    hash = {}
+    @games.each do |game|
+      unless hash.keys.include?(game.season)
+        hash[game.season] = [game.score]
+      else
+        hash[game.season] << game.score
+      end
+    end
+    hash.transform_values{|scores| scores.sum.fdiv(scores.length)}
+  end
 end
