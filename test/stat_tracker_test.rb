@@ -6,7 +6,7 @@ class StatTrackerTest < Minitest::Test
 
   def setup
     game_path       = './data/sample/game_sample.csv'
-    team_path       = './data/actual/team_info.csv'
+    team_path       = './data/sample/team_info_sample.csv'
     game_teams_path = './data/sample/game_teams_stats_sample.csv'
 
     locations = {
@@ -75,17 +75,17 @@ class StatTrackerTest < Minitest::Test
   #IT3
 
   def test_returns_count_of_teams
-    assert_equal 32, @stat_tracker.count_of_teams
+    assert_equal 4, @stat_tracker.count_of_teams
   end
 
-  # def test_returns_best_offense
-  #   assert_equal "Lightning", @stat_tracker.best_offense
-  # end
-  #
-  # def test_returns_worst_offense
-  #   assert_equal "Wild", @stat_tracker.worst_offense
-  # end
-  #
+  def test_returns_best_offense
+    assert_equal "Bruins", @stat_tracker.best_offense
+  end
+
+  def test_returns_worst_offense
+    assert_equal "Flyers", @stat_tracker.worst_offense
+  end
+
   # def test_returns_best_defense
   #   assert_equal "Stars", @stat_tracker.best_defense
   # end

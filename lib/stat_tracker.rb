@@ -90,8 +90,14 @@ class StatTracker
     @teams.count
   end
 
-  # def best_offense
-  #   best_team = @game_teams.max_by{|
-  # end
+  def best_offense
+    best_team = @teams.max_by{|team| team.games.sum(&:goals).fdiv(team.games.count)}
+    best_team.teamname
+  end
+
+  def worst_offense
+    worst_team = @teams.min_by{|team| team.games.sum(&:goals).fdiv(team.games.count)}
+    worst_team.teamname
+  end
 
 end
