@@ -24,7 +24,7 @@ class StatTracker
   def generate_teams(teams_table)
     @teams = teams_table.map{|team_info| Team.new(team_info)}
   end
-  
+
   def generate_game_teams(game_teams_table)
     @teams = game_teams_table.map{|game_team_info| GameTeam.new(game_team_info)}
   end
@@ -79,4 +79,11 @@ class StatTracker
     end
     hash.transform_values{|scores| scores.sum.fdiv(scores.length)}
   end
+
+#It3
+
+  def count_of_teams
+    @teams.sum
+  end
+
 end

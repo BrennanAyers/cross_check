@@ -8,7 +8,7 @@ class GameTeamTest < Minitest::Test
   end
 
   def test_has_correct_information
-   assert_equal 2021030221, @game_team.game_id
+   assert_equal 2012030221, @game_team.game_id
    assert_equal 3, @game_team.team_id
    assert_equal 'away', @game_team.hoa
    assert_equal 'FALSE', @game_team.won
