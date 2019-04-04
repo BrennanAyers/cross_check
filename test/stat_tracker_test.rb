@@ -42,13 +42,13 @@ class StatTrackerTest < Minitest::Test
     assert_equal 5, @stat_tracker.biggest_blowout
   end
   #
-  # def test_returns_percentage_home_wins
-  #   assert_equal 0.5, @stat_tracker.percentage_home_wins
-  # end
+  def test_returns_percentage_home_wins
+    assert_equal 0.5, @stat_tracker.percentage_home_wins
+  end
   #
-  # def test_returns_percentage_away_wins
-  #   assert_equal 0.5, @stat_tracker.percentage_away_wins
-  # end
+  def test_returns_percentage_away_wins
+    assert_equal 0.5, @stat_tracker.percentage_away_wins
+  end
   #
   # def test_returns_count_of_game_by_season
   #   expected = {

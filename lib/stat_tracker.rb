@@ -37,4 +37,11 @@ class StatTracker
     @games.max_by{|game|game.score_differential}.score_differential
   end
 
+  def percentage_home_wins
+    @games.count{|game| game.outcome.include?("home")} / @games.count.to_f
+  end
+  def percentage_away_wins
+    @games.count{|game| game.outcome.include?("away")} / @games.count.to_f
+  end
+
 end
