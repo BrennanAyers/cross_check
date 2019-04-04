@@ -27,5 +27,12 @@ class GameTest < Minitest::Test
     assert_equal "America/New_York", @game.venue_time_zone_id
     assert_equal (-4), @game.venue_time_zone_offset
     assert_equal "EDT", @game.venue_time_zone_tz
+
+    assert_equal 5, @game.score
   end
+
+  def test_returns_score_differential
+    assert_equal 1, @game.score_differential
+  end
+
 end
