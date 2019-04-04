@@ -16,7 +16,6 @@ class StatTracker
     @@games_table = CSV.table(locations[:games], options = Hash.new)
     @@teams_table = CSV.table(locations[:teams], options = Hash.new)
     @@seasons_table = CSV.table(locations[:game_teams], options = Hash.new)
-
   end
 
   def self.games_table
