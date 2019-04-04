@@ -13,11 +13,12 @@ class Game
               :venue_link,
               :venue_time_zone_id,
               :venue_time_zone_offset,
-              :venue_time_zone_tz
+              :venue_time_zone_tz,
+              :score
 
   def initialize(info)
     @id = info[:game_id]
-    @season = info[:season]
+    @season = info[:season].to_s
     @type = info[:type]
     @date_time = info[:date_time]
     @away_team_id = info[:away_team_id]
@@ -31,7 +32,13 @@ class Game
     @venue_time_zone_id = info[:venue_time_zone_id]
     @venue_time_zone_offset = info[:venue_time_zone_offset]
     @venue_time_zone_tz = info[:venue_time_zone_tz]
+    @score = info[:away_goals] + info[:home_goals]
   end
+
+  def score_differential
+    (@away_goals - @home_goals).abs
+  end
+
 
 
 end
