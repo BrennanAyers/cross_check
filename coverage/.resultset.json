@@ -1,0 +1,32 @@
+{
+  "Unit Tests": {
+    "coverage": {
+      "/Users/patrickduvall/turing/1module/projects/cross_check/test/team_test.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1554404231
+  }
+}
