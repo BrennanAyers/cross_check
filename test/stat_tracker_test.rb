@@ -15,8 +15,8 @@ class StatTrackerTest < Minitest::Test
       game_teams: game_teams_path
     }
 
-    StatTracker.from_csv(locations)
-    @stat_tracker = StatTracker.new(StatTracker.games_table, StatTracker.teams_table, StatTracker.seasons_table)
+    StatTracker.from_csv
+    @stat_tracker = StatTracker.from_csv
   end
 
   def test_it_exists

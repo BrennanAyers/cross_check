@@ -1,4 +1,6 @@
 require 'csv'
+require "./lib/game"
+require "./lib/team"
 
 class StatTracker
   attr_reader :games, :seasons, :teams
@@ -13,20 +15,21 @@ class StatTracker
   end
 
   def self.from_csv(locations)
-    @@games_table = CSV.table(locations[:games], options = Hash.new)
-    @@teams_table = CSV.table(locations[:teams], options = Hash.new)
-    @@seasons_table = CSV.table(locations[:game_teams], options = Hash.new)
+    games_table = CSV.table(locations[:games], options = Hash.new)
+    teams_table = CSV.table(locations[:teams], options = Hash.new)
+    seasons_table = CSV.table(locations[:game_teams], options = Hash.new)
+    self.new(games_table, teams_table, seasons_table)
   end
 
-  def self.games_table
-    @@games_table
-  end
-  def self.seasons_table
-    @@seasons_table
-  end
-  def self.teams_table
-    @@teams_table
-  end
+  # def self.games_table
+  #   @@games_table
+  # end
+  # def self.seasons_table
+  #   @@seasons_table
+  # end
+  # def self.teams_table
+  #   @@teams_table
+  # end
 
   def generate_games(games_table)
     @games = games_table.map{|game_info| Game.new(game_info)}
@@ -36,9 +39,9 @@ class StatTracker
       @teams = teams_table.map{|team_info| Team.new(team_info)}
   end
 
-  def generate_seasons(seasons_table, teams_table, games_table, number_of_seasons)
-    number_of_seasons.each do |season|
-      @seasons[season] = Season.new(seasons_table, teams_table, games_table)
-    end
-  end
+  # def generate_seasons(seasons_table, teams_table, games_table, number_of_seasons)
+  #   number_of_seasons.each do |season|
+  #     @seasons[season] = Season.new(seasons_table, teams_table, games_table)
+  #   end
+  # end
 end
