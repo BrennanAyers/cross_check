@@ -3,9 +3,9 @@ require "./lib/game"
 require "./lib/team"
 
 class StatTracker
-  attr_reader :games, :seasons, :teams
-  def initialize(games_table, teams_table, season_table)
-    @seasons = {}
+  attr_reader :games, :game_teams, :teams
+  def initialize(games_table, teams_table, game_teams_table)
+    @game_teams = generate_game_teams(game_teams_table)
     @games = generate_games(games_table)
     @teams = generate_teams(teams_table)
   end
@@ -13,8 +13,8 @@ class StatTracker
   def self.from_csv(locations)
     games_table = CSV.table(locations[:games], options = Hash.new)
     teams_table = CSV.table(locations[:teams], options = Hash.new)
-    seasons_table = CSV.table(locations[:game_teams], options = Hash.new)
-    self.new(games_table, teams_table, seasons_table)
+    game_teams_table = CSV.table(locations[:game_teams], options = Hash.new)
+    self.new(games_table, teams_table, game_teams_table)
   end
 
   def generate_games(games_table)
@@ -23,6 +23,10 @@ class StatTracker
 
   def generate_teams(teams_table)
     @teams = teams_table.map{|team_info| Team.new(team_info)}
+  end
+  
+  def generate_game_teams(game_teams_table)
+    @teams = game_teams_table.map{|game_team_info| GameTeam.new(game_team_info)}
   end
 
   def highest_total_score

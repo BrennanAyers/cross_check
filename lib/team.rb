@@ -12,6 +12,11 @@ class Team
     @teamname = info[:teamname]
     @abbreviation = info[:abbreviation]
     @link = info[:link]
+    @games = []
+  end
+
+  def add_game(game)
+    @games << game
   end
 
 
