@@ -5,7 +5,7 @@ class StatTracker
   def initialize(games_table, teams_table, season_table)
     @seasons = {}
     @games = generate_games(games_table)
-    @teams = []
+    @teams = generate_teams(teams_table)
     # number_of_seasons = games_table.map do |row|
     #   row[:season]
     # end.uniq!
@@ -29,13 +29,11 @@ class StatTracker
   end
 
   def generate_games(games_table)
-  @games = games_table.map{|el| Game.new(el)}
+    @games = games_table.map{|game_info| Game.new(game_info)}
   end
 
   def generate_teams(teams_table)
-    teams_table.each do |team|
-      @teams[team[:team_id]] = Team.new(team)
-    end
+      @teams = teams_table.map{|team_info| Team.new(team_info)}
   end
 
   def generate_seasons(seasons_table, teams_table, games_table, number_of_seasons)

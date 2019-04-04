@@ -27,6 +27,10 @@ class StatTrackerTest < Minitest::Test
     @stat_tracker.games.each{|game| assert_instance_of(Game, game)}
   end
 
+  def test_generates_teams
+    @stat_tracker.teams.each{|team| assert_instance_of(Team, team)}
+  end
+
   # def test_returns_highest_total_score
   #   assert_equal 7, @stat_tracker.highest_total_score
   # end
