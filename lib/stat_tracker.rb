@@ -22,7 +22,7 @@ class StatTracker
   end
 
   def generate_teams(teams_table)
-      @teams = teams_table.map{|team_info| Team.new(team_info)}
+    @teams = teams_table.map{|team_info| Team.new(team_info)}
   end
 
   def highest_total_score
@@ -40,8 +40,21 @@ class StatTracker
   def percentage_home_wins
     @games.count{|game| game.outcome.include?("home")} / @games.count.to_f
   end
+
   def percentage_away_wins
     @games.count{|game| game.outcome.include?("away")} / @games.count.to_f
+  end
+
+  def count_of_games_by_season
+    hash = {}
+    @games.each do |game|
+      unless hash.keys.include?(game.season)
+        hash[game.season] = 1
+      else
+        hash[game.season] +=1
+      end
+    end
+    hash
   end
 
 end
