@@ -87,11 +87,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   # def test_returns_best_defense
-  #   assert_equal "Stars", @stat_tracker.best_defense
+  #   assert_equal "Capitals", @stat_tracker.best_defense
   # end
-  #
+  # 
   # def test_returns_worst_defense
-  #   assert_equal "Lightning", @stat_tracker.worst_defense
+  #   assert_equal "Rangers", @stat_tracker.worst_defense
   # end
   #
   # def test_returns_highest_scoring_visitor

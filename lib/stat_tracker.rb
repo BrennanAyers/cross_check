@@ -30,7 +30,7 @@ class StatTracker
   end
 
   def generate_game_teams(game_teams_table)
-    @teams = game_teams_table.map{|game_team_info| GameTeam.new(game_team_info)}
+    @game_teams = game_teams_table.map{|game_team_info| GameTeam.new(game_team_info)}
   end
 
   def highest_total_score
@@ -99,5 +99,13 @@ class StatTracker
     worst_team = @teams.min_by{|team| team.games.sum(&:goals).fdiv(team.games.count)}
     worst_team.teamname
   end
+
+  # def best_defense
+  #   require "pry"; binding.pry
+  # end
+  #
+  # def worst_defense
+  #
+  # end
 
 end
