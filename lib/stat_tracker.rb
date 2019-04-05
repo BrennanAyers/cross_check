@@ -94,31 +94,36 @@ class StatTracker
   end
 
   def best_offense
-    best_team = @teams.max_by{|team| team.games.sum(&:goals).fdiv(team.games.count)}
+    best_team = @teams.max_by do |team|
+      team_goals = team.games.map{|game|(team.our_stats_in_game(game).goals)}
+      team_goals.sum.fdiv(team.games.count)
+    end
     best_team.teamname
   end
 
   def worst_offense
-    worst_team = @teams.min_by{|team| team.games.sum(&:goals).fdiv(team.games.count)}
+    worst_team = @teams.min_by do |team|
+      team_goals = team.games.map{|game|(team.our_stats_in_game(game).goals)}
+      team_goals.sum.fdiv(team.games.count)
+    end
     worst_team.teamname
   end
 
   def best_defense
-    # require "pry"; binding.pry
     team = @teams.min_by do |team|
       game_goals = team.games.map{|game|
-        # require "pry"; binding.pry
         team.rival_stats_in_game(game).goals}
-      # require "pry"; binding.pry
-
       game_goals.sum.fdiv(game_goals.length)
     end
     team.teamname
-
   end
-  # #
-  # def worst_defense
-  #
-  # end
 
+  def worst_defense
+    team = @teams.max_by do |team|
+      game_goals = team.games.map{|game|
+        team.rival_stats_in_game(game).goals}
+      game_goals.sum.fdiv(game_goals.length)
+    end
+    team.teamname
+  end
 end
