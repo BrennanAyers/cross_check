@@ -19,12 +19,15 @@ class StatTracker
 
   def generate_games(games_table)
     @games = games_table.map{|game_info| Game.new(game_info)}
+    @games.each do |game|
+      @game_teams.each{|game_team|game.add(game_team) if game.id == game_team.game_id}
+    end
   end
 
   def generate_teams(teams_table)
     @teams = teams_table.map{|team_info| Team.new(team_info)}
     @teams.each do |team|
-      @game_teams.each{|game|team.add(game) if game.team_id == team.id}
+      @games.each{|game|team.add(game) if game.away_team_id == team.id || game.home_team_id == team.id}
     end
 
   end
@@ -91,21 +94,53 @@ class StatTracker
   end
 
   def best_offense
-    best_team = @teams.max_by{|team| team.games.sum(&:goals).fdiv(team.games.count)}
+    best_team = @teams.max_by do |team|
+      team_goals = team.games.map{|game|(team.our_stats_in_game(game).goals)}
+      team_goals.sum.fdiv(team.games.count)
+    end
     best_team.teamname
   end
 
   def worst_offense
-    worst_team = @teams.min_by{|team| team.games.sum(&:goals).fdiv(team.games.count)}
+    worst_team = @teams.min_by do |team|
+      team_goals = team.games.map{|game|(team.our_stats_in_game(game).goals)}
+      team_goals.sum.fdiv(team.games.count)
+    end
     worst_team.teamname
   end
 
-  # def best_defense
-  #   require "pry"; binding.pry
-  # end
-  #
-  # def worst_defense
-  #
-  # end
+  def best_defense
+    team = @teams.min_by do |team|
+      game_goals = team.games.map{|game|
+        team.rival_stats_in_game(game).goals}
+      game_goals.sum.fdiv(game_goals.length)
+    end
+    team.teamname
+  end
 
+  def worst_defense
+    team = @teams.max_by do |team|
+      game_goals = team.games.map{|game|
+        team.rival_stats_in_game(game).goals}
+      game_goals.sum.fdiv(game_goals.length)
+    end
+    team.teamname
+  end
+
+  def highest_scoring_visitor
+    best_visitor = @teams.max_by do |team|
+      away_games = @games.select{|game| team.id == game.away_team_id}
+      away_goals = away_games.map{|game|(game.away_goals)}
+      away_goals.sum.fdiv(away_games.count)
+    end
+    best_visitor.teamname
+  end
+  def highest_scoring_home_team
+    best_home = @teams.max_by do |team|
+      home_games = @games.select{|game| team.id == game.home_team_id}
+      home_goals = home_games.map{|game|(game.away_goals)}
+      home_goals.sum.fdiv(home_games.count)
+    end
+    best_home.teamname
+  end
 end

@@ -23,7 +23,8 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_generates_games
-    @stat_tracker.games.each{|game| assert_instance_of(Game, game)}
+    @stat_tracker.games.each{|game| assert_instance_of(Game, game)
+    assert_equal 2, game.team_stats.length }
   end
 
   def test_generates_teams
@@ -86,21 +87,21 @@ class StatTrackerTest < Minitest::Test
     assert_equal "Flyers", @stat_tracker.worst_offense
   end
 
-  # def test_returns_best_defense
-  #   assert_equal "Capitals", @stat_tracker.best_defense
-  # end
-  # 
-  # def test_returns_worst_defense
-  #   assert_equal "Rangers", @stat_tracker.worst_defense
-  # end
+  def test_returns_best_defense
+    assert_equal "Capitals", @stat_tracker.best_defense
+  end
+
+  def test_returns_worst_defense
+    assert_equal "Rangers", @stat_tracker.worst_defense
+  end
   #
-  # def test_returns_highest_scoring_visitor
-  #   assert_equal "Rangers", @stat_tracker.highest_scoring_visitor
-  # end
-  #
-  # def test_returns_highest_scoring_home_team
-  #   assert_equal "Lightning", @stat_tracker.highest_scoring_home_team
-  # end
+  def test_returns_highest_scoring_visitor
+    assert_equal "Capitals", @stat_tracker.highest_scoring_visitor
+  end
+
+  def test_returns_highest_scoring_home_team
+    assert_equal "Flyers", @stat_tracker.highest_scoring_home_team
+  end
   #
   # def test_returns_lowest_scoring_visitor
   #   assert_equal "Wild", @stat_tracker.lowest_scoring_vistor
