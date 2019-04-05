@@ -19,12 +19,15 @@ class StatTracker
 
   def generate_games(games_table)
     @games = games_table.map{|game_info| Game.new(game_info)}
+    @games.each do |game|
+      @game_teams.each{|game_team|game.add(game_team) if game.id == game_team.game_id}
+    end
   end
 
   def generate_teams(teams_table)
     @teams = teams_table.map{|team_info| Team.new(team_info)}
     @teams.each do |team|
-      @game_teams.each{|game|team.add(game) if game.team_id == team.id}
+      @games.each{|game|team.add(game) if game.away_team_id == team.id || game.home_team_id == team.id}
     end
 
   end
@@ -100,10 +103,20 @@ class StatTracker
     worst_team.teamname
   end
 
-  # def best_defense
-  #   require "pry"; binding.pry
-  # end
-  #
+  def best_defense
+    # require "pry"; binding.pry
+    team = @teams.min_by do |team|
+      game_goals = team.games.map{|game|
+        # require "pry"; binding.pry
+        team.rival_stats_in_game(game).goals}
+      # require "pry"; binding.pry
+
+      game_goals.sum.fdiv(game_goals.length)
+    end
+    team.teamname
+
+  end
+  # #
   # def worst_defense
   #
   # end

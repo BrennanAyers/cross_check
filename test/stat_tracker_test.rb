@@ -23,7 +23,8 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_generates_games
-    @stat_tracker.games.each{|game| assert_instance_of(Game, game)}
+    @stat_tracker.games.each{|game| assert_instance_of(Game, game)
+    assert_equal 2, game.team_stats.length }
   end
 
   def test_generates_teams
@@ -86,10 +87,10 @@ class StatTrackerTest < Minitest::Test
     assert_equal "Flyers", @stat_tracker.worst_offense
   end
 
-  # def test_returns_best_defense
-  #   assert_equal "Capitals", @stat_tracker.best_defense
-  # end
-  # 
+  def test_returns_best_defense
+    assert_equal "Capitals", @stat_tracker.best_defense
+  end
+  # #
   # def test_returns_worst_defense
   #   assert_equal "Rangers", @stat_tracker.worst_defense
   # end
