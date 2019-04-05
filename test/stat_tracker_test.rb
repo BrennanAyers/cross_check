@@ -95,13 +95,13 @@ class StatTrackerTest < Minitest::Test
     assert_equal "Rangers", @stat_tracker.worst_defense
   end
   #
-  # def test_returns_highest_scoring_visitor
-  #   assert_equal "Rangers", @stat_tracker.highest_scoring_visitor
-  # end
-  #
-  # def test_returns_highest_scoring_home_team
-  #   assert_equal "Lightning", @stat_tracker.highest_scoring_home_team
-  # end
+  def test_returns_highest_scoring_visitor
+    assert_equal "Capitals", @stat_tracker.highest_scoring_visitor
+  end
+
+  def test_returns_highest_scoring_home_team
+    assert_equal "Flyers", @stat_tracker.highest_scoring_home_team
+  end
   #
   # def test_returns_lowest_scoring_visitor
   #   assert_equal "Wild", @stat_tracker.lowest_scoring_vistor

@@ -126,4 +126,21 @@ class StatTracker
     end
     team.teamname
   end
+
+  def highest_scoring_visitor
+    best_visitor = @teams.max_by do |team|
+      away_games = @games.select{|game| team.id == game.away_team_id}
+      away_goals = away_games.map{|game|(game.away_goals)}
+      away_goals.sum.fdiv(away_games.count)
+    end
+    best_visitor.teamname
+  end
+  def highest_scoring_home_team
+    best_home = @teams.max_by do |team|
+      home_games = @games.select{|game| team.id == game.home_team_id}
+      home_goals = home_games.map{|game|(game.away_goals)}
+      home_goals.sum.fdiv(home_games.count)
+    end
+    best_home.teamname
+  end
 end
