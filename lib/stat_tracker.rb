@@ -110,21 +110,21 @@ class StatTracker
   end
 
   def best_defense
-    team = @teams.min_by do |team|
+    best_team = @teams.min_by do |team|
       game_goals = team.games.map{|game|
         team.rival_stats_in_game(game).goals}
       game_goals.sum.fdiv(game_goals.length)
     end
-    team.teamname
+    best_team.teamname
   end
 
   def worst_defense
-    team = @teams.max_by do |team|
+    worst_team = @teams.max_by do |team|
       game_goals = team.games.map{|game|
         team.rival_stats_in_game(game).goals}
       game_goals.sum.fdiv(game_goals.length)
     end
-    team.teamname
+    worst_team.teamname
   end
 
   def highest_scoring_visitor
@@ -135,6 +135,7 @@ class StatTracker
     end
     best_visitor.teamname
   end
+
   def highest_scoring_home_team
     best_home = @teams.max_by do |team|
       home_games = @games.select{|game| team.id == game.home_team_id}
@@ -143,4 +144,23 @@ class StatTracker
     end
     best_home.teamname
   end
+
+  def lowest_scoring_visitor
+    worst_visitor = @teams.min_by do |team|
+      away_games = @games.select{|game| team.id == game.away_team_id}
+      away_goals = away_games.map{|game|(game.away_goals)}
+      away_goals.sum.fdiv(away_games.count)
+    end
+    worst_visitor.teamname
+  end
+
+  def lowest_scoring_home_team
+    worst_home = @teams.min_by do |team|
+      home_games = @games.select{|game| team.id == game.home_team_id}
+      home_goals = home_games.map{|game|(game.away_goals)}
+      home_goals.sum.fdiv(home_games.count)
+    end
+    worst_home.teamname
+  end
+
 end
