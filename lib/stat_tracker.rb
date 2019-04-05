@@ -163,4 +163,26 @@ class StatTracker
     worst_home.teamname
   end
 
+  def winningest_team
+    winningest = @teams.max_by do |team|
+      team_wins = team.games.map{|game|(team.our_stats_in_game(game).won == true)}
+      team_wins.count.fdiv(team.games.count)
+    end
+    winningest.teamname
+  end
+
+  def best_fans
+    best_team = @teams.max_by do |team|
+      team.home_win_percentage - team.away_win_percentage
+    end
+    best_team.teamname
+  end
+
+  def worst_fans
+    worst_team = @teams.max_by do |team|
+      team.away_win_percentage - team.home_win_percentage
+    end
+    worst_team.teamname
+  end
+
 end
