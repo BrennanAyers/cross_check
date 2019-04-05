@@ -4,7 +4,10 @@ require_relative './game'
 require_relative './team'
 
 class StatTracker
-  attr_reader :games, :game_teams, :teams
+  attr_reader :games,
+              :game_teams,
+              :teams
+
   def initialize(games_table, teams_table, game_teams_table)
     @game_teams = generate_game_teams(game_teams_table)
     @games = generate_games(games_table)
