@@ -16,15 +16,23 @@ class Season
   end
 
   def regular_season_sort(games)
-    games.select {|game| game.type == "R" }
+    games.select {|game| game.type == "R"}
   end
 
   def post_season_sort(games)
-    games.select {|game| game.type == "P" }
+    games.select {|game| game.type == "P"}
   end
 
   def win_percentage
     games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(games.length)
+  end
+
+  def regular_season_win_percentage
+    regular_season_games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(regular_season_games.length)
+  end
+
+  def post_season_win_percentage
+    post_season_games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(post_season_games.length)
   end
 
 end
