@@ -77,4 +77,14 @@ class SeasonTest < MiniTest::Test
     assert_equal 8, @season.post_season_average_goals
   end
 
+  def test_returns_regular_season_average_goals_against
+    @season.stubs(regular_season_average_goals_against: 3.33)
+    assert_equal 3.33, @season.regular_season_average_goals_against
+  end
+
+  def test_returns_post_season_average_goals_against
+    @season.stubs(post_season_average_goals_against: 10)
+    assert_equal 10, @season.post_season_average_goals_against
+  end
+
 end
