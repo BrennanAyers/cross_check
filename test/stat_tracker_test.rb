@@ -49,8 +49,8 @@ class StatTrackerTest < Minitest::Test
     assert_equal 0.5, @stat_tracker.percentage_home_wins
   end
 
-  def test_returns_percentage_away_wins
-    assert_equal 0.5, @stat_tracker.percentage_away_wins
+  def test_returns_percentage_visitor_wins
+    assert_equal 0.5, @stat_tracker.percentage_visitor_wins
   end
 
   def test_returns_count_of_game_by_season
@@ -119,6 +119,6 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_worst_fans
-    assert_equal "Not Farts", @stat_tracker.worst_fans
+    assert_equal ["Bruins"], @stat_tracker.worst_fans
   end
 end

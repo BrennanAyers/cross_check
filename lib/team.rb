@@ -39,13 +39,13 @@ class Team
 
   def home_win_percentage
     @games.count do |game|
-      our_stats_in_game(game).hoa == "home" && our_stats_in_game(game).won == true
+      our_stats_in_game(game).hoa == "home" && our_stats_in_game(game).won == "TRUE"
     end.fdiv(number_of_home_games)
   end
 
   def away_win_percentage
     @games.count do |game|
-      our_stats_in_game(game).hoa == "away" && our_stats_in_game(game).won == true
+      our_stats_in_game(game).hoa == "away" && our_stats_in_game(game).won == "TRUE"
     end.fdiv(number_of_away_games)
   end
 
