@@ -23,8 +23,8 @@ class Season
     games.select {|game| game.type == "P" }
   end
 
-  # def win_percentage
-  #   games.count {|game| game.}
-  # end
+  def win_percentage
+    games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(games.length)
+  end
 
 end
