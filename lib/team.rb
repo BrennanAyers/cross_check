@@ -34,7 +34,7 @@ class Team
       games_in_season = @games.select do |game|
         game.season == season
       end
-      @seasons << Season.new(games_in_season, @id)
+      @seasons << Season.new(games_in_season, @id, season)
     end
   end
 
