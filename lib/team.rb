@@ -1,6 +1,9 @@
 require_relative './season'
+require_relative './team_specific_stats'
 
 class Team
+  include TeamSpecificStats
+
   attr_reader :id,
               :franchiseid,
               :shortname,
@@ -36,13 +39,6 @@ class Team
   end
 
   ##NO TESTS##
-  def our_stats_in_game(game)
-    game.team_stats.find{|stats| stats.team_id == @id}
-  end
-
-  def rival_stats_in_game(game)
-    game.team_stats.find{|stats| stats.team_id != @id}
-  end
 
   def number_of_home_games
     @games.count{|game| game.home_team_id == @id}
