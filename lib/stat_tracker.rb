@@ -36,6 +36,7 @@ class StatTracker
     @teams = teams_table.map{|team_info| Team.new(team_info)}
     @teams.each do |team|
       @games.each{|game|team.add(game) if game.away_team_id == team.id || game.home_team_id == team.id}
+      team.generate_seasons
     end
   end
 

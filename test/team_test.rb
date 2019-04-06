@@ -9,8 +9,10 @@ class TeamTest < Minitest::Test
   def setup
     info = {team_id: 1, franchiseid: 23, shortname: "New Jersey", teamname: "Devils", abbreviation: "NJD", link: "/api/v1/teams/1"}
     @team = Team.new(info)
-    @game = mock
-    @game_2 = mock
+    @game = mock("Game 1")
+    @game.stubs(season: "20122013", type: "R")
+    @game_2 = mock("Game 2")
+    @game_2.stubs(season: "20132014", type: "R")
   end
 
   def test_it_exists
@@ -31,6 +33,14 @@ class TeamTest < Minitest::Test
     assert_equal [@game], @team.games
     @team.add(@game_2)
     assert_equal [@game, @game_2], @team.games
+  end
+
+  def test_can_generate_seasons
+    @team.add(@game)
+    @team.add(@game_2)
+    @team.generate_seasons
+
+    assert_equal 2, @team.seasons.length
   end
 
 #Maybe inadequate
