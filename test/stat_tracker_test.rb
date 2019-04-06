@@ -122,4 +122,15 @@ class StatTrackerTest < Minitest::Test
     assert_equal ["Capitals", "Flyers"], @stat_tracker.worst_fans
   end
 
+  def test_returns_team_info
+    expected = {"team_id"      => "6",
+                "franchiseid"  => "6",
+                "shortname"    => "Boston",
+                "teamname"     => "Bruins",
+                "abbreviation" => "BOS",
+                "link"         => "/api/v1/teams/6"}
+
+    assert_equal expected, @stat_tracker.team_info("6")
+  end
+
 end

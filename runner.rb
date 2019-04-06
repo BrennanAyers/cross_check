@@ -11,6 +11,11 @@ locations = {
 }
 
 
-stattrack = StatTracker.from_csv(locations)
+stat_tracker = StatTracker.from_csv(locations)
 
 require 'pry'; binding.pry
+
+# require 'benchmark'
+# Benchmark.bmbm do |x|
+#   x.report("bench") { StatTracker.from_csv(locations) }
+# end

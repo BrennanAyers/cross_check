@@ -188,4 +188,9 @@ class StatTracker
     end.map(&:teamname)
   end
 
+  def team_info(team_id)
+    team = @teams.find {|team| team.id.to_s == team_id}
+    {"team_id" => team.id.to_s, "franchiseid" => team.franchiseid.to_s, "shortname" => team.shortname, "teamname" => team.teamname, "abbreviation" => team.abbreviation, "link" => team.link}
+  end
+
 end
