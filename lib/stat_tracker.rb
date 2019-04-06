@@ -99,7 +99,7 @@ class StatTracker
 
   def best_offense
     best_team = @teams.max_by do |team|
-      team_goals = team.games.map{|game|(team.our_stats_in_game(game).goals)}
+      team_goals = team.games.map{|game|(team.our_stats_in_game(game, team.id).goals)}
       team_goals.sum.fdiv(team.games.count)
     end
     best_team.teamname
@@ -107,7 +107,7 @@ class StatTracker
 
   def worst_offense
     worst_team = @teams.min_by do |team|
-      team_goals = team.games.map{|game|(team.our_stats_in_game(game).goals)}
+      team_goals = team.games.map{|game|(team.our_stats_in_game(game, team.id).goals)}
       team_goals.sum.fdiv(team.games.count)
     end
     worst_team.teamname
@@ -116,7 +116,7 @@ class StatTracker
   def best_defense
     best_team = @teams.min_by do |team|
       game_goals = team.games.map{|game|
-        team.rival_stats_in_game(game).goals}
+        team.rival_stats_in_game(game, team.id).goals}
       game_goals.sum.fdiv(game_goals.length)
     end
     best_team.teamname
@@ -125,7 +125,7 @@ class StatTracker
   def worst_defense
     worst_team = @teams.max_by do |team|
       game_goals = team.games.map{|game|
-        team.rival_stats_in_game(game).goals}
+        team.rival_stats_in_game(game, team.id).goals}
       game_goals.sum.fdiv(game_goals.length)
     end
     worst_team.teamname
@@ -169,7 +169,7 @@ class StatTracker
 
   def winningest_team
     winningest = @teams.max_by do |team|
-      team_wins = team.games.select{|game|(team.our_stats_in_game(game).won == "TRUE")}
+      team_wins = team.games.select{|game|(team.our_stats_in_game(game, team.id).won == "TRUE")}
       team_wins.count.fdiv(team.games.count)
     end
     winningest.teamname
@@ -186,6 +186,17 @@ class StatTracker
     @teams.select do |team|
       team.home_win_percentage < team.away_win_percentage
     end.map(&:teamname)
+  end
+
+  def team_info(team_id)
+    team = @teams.find {|team| team.id.to_s == team_id}
+    {"team_id" => team.id.to_s, "franchiseid" => team.franchiseid.to_s, "shortname" => team.shortname, "teamname" => team.teamname, "abbreviation" => team.abbreviation, "link" => team.link}
+  end
+
+  def best_season(team_id)
+    team = @teams.find {|team| team.id.to_s == team_id}
+    best_season = team.seasons.max_by {|season| season.win_percentage}
+    best_season.id
   end
 
 end

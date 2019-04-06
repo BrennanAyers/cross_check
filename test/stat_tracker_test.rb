@@ -122,4 +122,25 @@ class StatTrackerTest < Minitest::Test
     assert_equal ["Capitals", "Flyers"], @stat_tracker.worst_fans
   end
 
+  def test_returns_team_info
+    expected = {"team_id"      => "6",
+                "franchiseid"  => "6",
+                "shortname"    => "Boston",
+                "teamname"     => "Bruins",
+                "abbreviation" => "BOS",
+                "link"         => "/api/v1/teams/6"}
+
+    assert_equal expected, @stat_tracker.team_info("6")
+  end
+
+  def test_returns_best_season_by_team
+    season_1 = mock
+    season_1.stubs(win_percentage: 0.55, id: 20122013)
+    season_2 = mock
+    season_2.stubs(win_percentage: 0.45, id: 20132014)
+    team = mock(best_season: [season_1, season_2].max_by {|season| season.win_percentage}.id)
+
+    assert_equal 20122013, team.best_season
+  end
+
 end
