@@ -68,11 +68,19 @@ class Season
   end
 
   def regular_season_average_goals
-    regular_season_goals.fdiv(regular_season_games.length)
+    regular_season_goals.fdiv(regular_season_games.length).round(2)
   end
 
   def post_season_average_goals
-    post_season_goals.fdiv(post_season_games.length)
+    post_season_goals.fdiv(post_season_games.length).round(2)
+  end
+
+  def regular_season_average_goals_against
+    regular_season_goals_against.fdiv(regular_season_games.length).round(2)
+  end
+
+  def post_season_average_goals_against
+    post_season_goals_against.fdiv(post_season_games.length).round(2)
   end
 
 end
