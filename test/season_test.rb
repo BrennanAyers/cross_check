@@ -47,14 +47,34 @@ class SeasonTest < MiniTest::Test
     assert_equal 0.1, @season.power_play_goal_percentage
   end
 
-  def test_returns_regular_goals_total
-    @season.stubs(regular_season_goals: 13)
-    assert_equal 13, @season.regular_season_goals
+  def test_returns_regular_season_goals_total
+    @season.stubs(regular_season_goals: 12)
+    assert_equal 12, @season.regular_season_goals
   end
 
-  def test_returns_post_goals_total
-    @season.stubs(post_season_goals: 7)
-    assert_equal 7, @season.post_season_goals
+  def test_returns_post_season_goals_total
+    @season.stubs(post_season_goals: 8)
+    assert_equal 8, @season.post_season_goals
+  end
+
+  def test_returns_regular_season_goals_against
+    @season.stubs(regular_goals_against: 10)
+    assert_equal 10, @season.regular_goals_against
+  end
+
+  def test_returns_post_season_goals_against
+    @season.stubs(post_goals_against: 10)
+    assert_equal 10, @season.post_goals_against
+  end
+
+  def test_returns_regular_season_average_goals
+    @season.stubs(regular_season_average_goals: 4)
+    assert_equal 4, @season.regular_season_average_goals
+  end
+
+  def test_returns_post_season_average_goals
+    @season.stubs(post_season_average_goals: 8)
+    assert_equal 8, @season.post_season_average_goals
   end
 
 end
