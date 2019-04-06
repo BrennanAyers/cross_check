@@ -6,25 +6,25 @@ class SeasonTest < MiniTest::Test
 
   def setup
     @game_1_find = mock("Game 1 Find")
-    @game_1_find.stubs(won: "TRUE")
+    @game_1_find.stubs(won: "TRUE", shots: 8, goals: 4, hits: 6)
     @game_1_team_stats = mock("Game 1 Stats")
     @game_1_team_stats.stubs(find: @game_1_find)
     @game_1 = mock("Game 1")
     @game_1.stubs(type: "R", team_stats: @game_1_team_stats)
     @game_2_find = mock("Game 2 Find")
-    @game_2_find.stubs(won: "TRUE")
+    @game_2_find.stubs(won: "TRUE", shots: 10, goals: 5, hits: 6)
     @game_2_team_stats = mock("Game 2 Stats")
     @game_2_team_stats.stubs(find: @game_2_find)
     @game_2 = mock("Game 2")
     @game_2.stubs(type: "R", team_stats: @game_2_team_stats)
     @game_3_find = mock("Game 3 Find")
-    @game_3_find.stubs(won: "FALSE")
+    @game_3_find.stubs(won: "FALSE", shots: 6, goals: 3, hits: 6)
     @game_3_team_stats = mock("Game 3 Stats")
     @game_3_team_stats.stubs(find: @game_3_find)
     @game_3 = mock("Game 3")
     @game_3.stubs(type: "R", team_stats: @game_3_team_stats)
     @game_4_find = mock("Game 4 Find")
-    @game_4_find.stubs(won: "FALSE")
+    @game_4_find.stubs(won: "FALSE", shots: 16, goals: 8, hits: 7)
     @game_4_team_stats = mock("Game 4 Stats")
     @game_4_team_stats.stubs(find: @game_4_find)
     @game_4 = mock("Game 4")
@@ -55,16 +55,16 @@ class SeasonTest < MiniTest::Test
     @season.stubs(post_season_win_percentage: 0)
     assert_equal 0, @season.post_season_win_percentage
   end
-#
-#   def test_returns_shot_accuracy
-#     @season.stubs(shot_accuracy: 0.5)
-#     assert_equal 0.5, @season.shot_accuracy
-#   end
-#
-#   def test_returns_number_of_hits
-#     @season.stubs(number_of_hits: 25)
-#     assert_equal 25, @season.number_of_hits
-#   end
+
+  def test_returns_shot_accuracy
+    @season.stubs(shot_accuracy: 0.5)
+    assert_equal 0.5, @season.shot_accuracy
+  end
+
+  def test_returns_number_of_hits
+    @season.stubs(number_of_hits: 25)
+    assert_equal 25, @season.number_of_hits
+  end
 #
 #   def test_returns_power_play_goal_percentage
 #     @season.stubs(power_play_goal_percentage: 0.1)

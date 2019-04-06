@@ -35,4 +35,16 @@ class Season
     post_season_games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(post_season_games.length)
   end
 
+  def shot_accuracy
+    shots = games.sum {|game| our_stats_in_game(game).shots}
+    goals = games.sum {|game| our_stats_in_game(game).goals}
+    goals / shots
+  end
+
+  def number_of_hits
+    games.sum {|game| our_stats_in_game(game).hits}
+  end
+
+
+
 end
