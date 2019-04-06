@@ -1,6 +1,6 @@
-require "./test/test_helper"
-require "./lib/stat_tracker"
-require "csv"
+require './test/test_helper'
+require './lib/stat_tracker'
+require 'csv'
 
 class StatTrackerTest < Minitest::Test
 
@@ -99,7 +99,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_highest_scoring_home_team
-    assert_equal "Flyers", @stat_tracker.highest_scoring_home_team
+    assert_equal "Bruins", @stat_tracker.highest_scoring_home_team
   end
 
   def test_returns_lowest_scoring_visitor
@@ -107,7 +107,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_lowest_scoring_home_team
-    assert_equal "Bruins", @stat_tracker.lowest_scoring_home_team
+    assert_equal "Capitals", @stat_tracker.lowest_scoring_home_team
   end
 
   def test_returns_winningest_team
@@ -115,10 +115,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_best_fans
-    assert_equal "Bruins", @stat_tracker.best_fans
+    assert_equal "Flyers", @stat_tracker.best_fans
   end
 
   def test_returns_worst_fans
-    assert_equal ["Bruins"], @stat_tracker.worst_fans
+    assert_equal ["Capitals", "Flyers"], @stat_tracker.worst_fans
   end
+
 end

@@ -1,33 +1,44 @@
+require_relative './season'
+require_relative './team_specific_stats'
+
 class Team
+  include TeamSpecificStats
+
   attr_reader :id,
               :franchiseid,
               :shortname,
               :teamname,
               :abbreviation,
               :link,
-              :games
+              :games,
+              :seasons
 
   def initialize(info)
-    @id = info[:team_id]
-    @franchiseid = info[:franchiseid]
-    @shortname = info[:shortname]
-    @teamname = info[:teamname]
+    @id           = info[:team_id]
+    @franchiseid  = info[:franchiseid]
+    @shortname    = info[:shortname]
+    @teamname     = info[:teamname]
     @abbreviation = info[:abbreviation]
-    @link = info[:link]
-    @games = []
+    @link         = info[:link]
+    @games        = []
+    @seasons      = []
   end
 
   def add(game)
     @games << game
   end
-  ##NO TESTS##
-  def our_stats_in_game(game)
-    game.team_stats.find{|stats| stats.team_id == @id}
+
+  def generate_seasons
+    seasons_played = @games.map {|game| game.season }.uniq
+    seasons_played.each do |season|
+      games_in_season = @games.select do |game|
+        game.season == season
+      end
+      @seasons << Season.new(games_in_season, @id)
+    end
   end
 
-  def rival_stats_in_game(game)
-    game.team_stats.find{|stats| stats.team_id != @id}
-  end
+  ##NO TESTS##
 
   def number_of_home_games
     @games.count{|game| game.home_team_id == @id}
