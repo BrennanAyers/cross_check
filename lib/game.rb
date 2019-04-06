@@ -45,8 +45,4 @@ class Game
     @team_stats << game_team
   end
 
-
-
-
-
 end
