@@ -1,6 +1,6 @@
-require "./test/test_helper"
-require "./lib/stat_tracker"
-require "csv"
+require './test/test_helper'
+require './lib/stat_tracker'
+require 'csv'
 
 class StatTrackerTest < Minitest::Test
 
@@ -121,4 +121,5 @@ class StatTrackerTest < Minitest::Test
   def test_returns_worst_fans
     assert_equal ["Capitals", "Flyers"], @stat_tracker.worst_fans
   end
+
 end

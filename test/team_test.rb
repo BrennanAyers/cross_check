@@ -1,9 +1,11 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/team'
-require "./lib/game"
-require "mocha/minitest"
+require './lib/game'
+require 'mocha/minitest'
+
 class TeamTest < Minitest::Test
+
   def setup
     info = {team_id: 1, franchiseid: 23, shortname: "New Jersey", teamname: "Devils", abbreviation: "NJD", link: "/api/v1/teams/1"}
     @team = Team.new(info)
@@ -30,6 +32,7 @@ class TeamTest < Minitest::Test
     @team.add(@game_2)
     assert_equal [@game, @game_2], @team.games
   end
+
 #Maybe inadequate
   # def test_finds_own_stats
   #
