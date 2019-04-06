@@ -13,7 +13,12 @@ class SeasonTest < MiniTest::Test
     @game_3.stubs(type: "R")
     @game_4 = mock
     @game_4.stubs(type: "P")
-    @season = Season.new([@game_1, @game_2, @game_3, @game_4])
+    @season = Season.new([@game_1, @game_2, @game_3, @game_4], 1)
+  end
+
+  def test_has_argument_attributes
+    assert_equal [@game_1, @game_2, @game_3, @game_4], @season.games
+    assert_equal 1, @season.team_id
   end
 
   def test_has_regular_and_post_season_games
