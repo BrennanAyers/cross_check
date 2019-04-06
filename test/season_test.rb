@@ -73,27 +73,33 @@ class SeasonTest < MiniTest::Test
   def test_returns_post_season_goals_total
     assert_equal 8, @season.post_season_goals
   end
-#
-#   def test_returns_regular_season_goals_against
-#     @season.stubs(regular_goals_against: 10)
-#     assert_equal 10, @season.regular_goals_against
-#   end
-#
-#   def test_returns_post_season_goals_against
-#     @season.stubs(post_goals_against: 10)
-#     assert_equal 10, @season.post_goals_against
-#   end
-#
-#   def test_returns_regular_season_average_goals
-#     @season.stubs(regular_season_average_goals: 4)
-#     assert_equal 4, @season.regular_season_average_goals
-#   end
-#
-#   def test_returns_post_season_average_goals
-#     @season.stubs(post_season_average_goals: 8)
-#     assert_equal 8, @season.post_season_average_goals
-#   end
-#
+
+  def test_returns_regular_season_goals_against
+    @game_1_find.stubs(goals: 2)
+    @game_2_find.stubs(goals: 2)
+    @game_3_find.stubs(goals: 6)
+    @game_4_find.stubs(goals: 1)
+
+    assert_equal 10, @season.regular_season_goals_against
+  end
+
+  def test_returns_post_season_goals_against
+    @game_1_find.stubs(goals: 2)
+    @game_2_find.stubs(goals: 2)
+    @game_3_find.stubs(goals: 6)
+    @game_4_find.stubs(goals: 10)
+
+    assert_equal 10, @season.post_season_goals_against
+  end
+
+  def test_returns_regular_season_average_goals
+    assert_equal 4, @season.regular_season_average_goals
+  end
+
+  def test_returns_post_season_average_goals
+    assert_equal 8, @season.post_season_average_goals
+  end
+
 #   def test_returns_regular_season_average_goals_against
 #     @season.stubs(regular_season_average_goals_against: 3.33)
 #     assert_equal 3.33, @season.regular_season_average_goals_against

@@ -32,7 +32,7 @@ class Season
   end
 
   def post_season_win_percentage
-    post_season_games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(post_season_games.length)
+    post_season_games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(post_season_games.length).round(2)
   end
 
   def shot_accuracy
@@ -57,6 +57,22 @@ class Season
 
   def post_season_goals
     post_season_games.sum {|game| our_stats_in_game(game).goals}
+  end
+
+  def regular_season_goals_against
+    regular_season_games.sum {|game| rival_stats_in_game(game).goals}
+  end
+
+  def post_season_goals_against
+    post_season_games.sum {|game| rival_stats_in_game(game).goals}
+  end
+
+  def regular_season_average_goals
+    regular_season_goals.fdiv(regular_season_games.length)
+  end
+
+  def post_season_average_goals
+    post_season_goals.fdiv(post_season_games.length)
   end
 
 end
