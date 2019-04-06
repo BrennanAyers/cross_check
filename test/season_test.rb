@@ -32,4 +32,14 @@ class SeasonTest < MiniTest::Test
     assert_equal 0, @season.post_season_win_percentage
   end
 
+  def test_returns_shot_accuracy
+    @season.stubs(shot_accuracy: 0.5)
+    assert_equal 0.5, @season.shot_accuracy
+  end
+
+  def test_returns_number_of_hits
+    @season.stubs(number_of_hits: 25)
+    assert_equal 25, @season.number_of_hits
+  end
+
 end
