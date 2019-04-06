@@ -21,6 +21,10 @@ class StatTracker
     self.new(games_table, teams_table, game_teams_table)
   end
 
+  def generate_game_teams(game_teams_table)
+    @game_teams = game_teams_table.map{|game_team_info| GameTeam.new(game_team_info)}
+  end
+
   def generate_games(games_table)
     @games = games_table.map{|game_info| Game.new(game_info)}
     @games.each do |game|
@@ -33,11 +37,6 @@ class StatTracker
     @teams.each do |team|
       @games.each{|game|team.add(game) if game.away_team_id == team.id || game.home_team_id == team.id}
     end
-
-  end
-
-  def generate_game_teams(game_teams_table)
-    @game_teams = game_teams_table.map{|game_team_info| GameTeam.new(game_team_info)}
   end
 
   def highest_total_score
