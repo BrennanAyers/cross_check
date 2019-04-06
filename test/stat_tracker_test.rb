@@ -54,10 +54,9 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_count_of_game_by_season
-    expected = {
-      '20122013' => 4,
-      '20152016' => 4
-    }
+    expected = {'20122013' => 4,
+                '20152016' => 4}
+
     assert_equal expected, @stat_tracker.count_of_games_by_season
   end
 
@@ -102,25 +101,24 @@ class StatTrackerTest < Minitest::Test
   def test_returns_highest_scoring_home_team
     assert_equal "Flyers", @stat_tracker.highest_scoring_home_team
   end
-  #
-  # def test_returns_lowest_scoring_visitor
-  #   assert_equal "Wild", @stat_tracker.lowest_scoring_vistor
-  # end
-  #
-  # def test_returns_lowest_scoring_home_team
-  #   assert_equal "Lightning", @stat_tracker.lowest_scoring_home_team
-  # end
-  #
-  # def test_returns_winningest_team
-  #   #hard saying not knowing
-  #   assert_equal "Bruins", @stat_tracker.winningest_team
-  # end
-  #
-  # def test_returns_best_fans
-  #   assert_equal "Bruins", @stat_tracker.best_fans
-  # end
-  #
-  # def test_returns_worst_fans
-  #   assert_equal "", @stat_tracker.worst_fans
-  # end
+
+  def test_returns_lowest_scoring_visitor
+    assert_equal "Rangers", @stat_tracker.lowest_scoring_visitor
+  end
+
+  def test_returns_lowest_scoring_home_team
+    assert_equal "Bruins", @stat_tracker.lowest_scoring_home_team
+  end
+
+  def test_returns_winningest_team
+    assert_equal "Bruins", @stat_tracker.winningest_team
+  end
+
+  def test_returns_best_fans
+    assert_equal "Bruins", @stat_tracker.best_fans
+  end
+
+  def test_returns_worst_fans
+    assert_equal "Not Farts", @stat_tracker.worst_fans
+  end
 end
