@@ -2,8 +2,10 @@ require 'csv'
 require_relative './game_team'
 require_relative './game'
 require_relative './team'
+require_relative './team_specific_stats'
 
 class StatTracker
+  include TeamSpecificStats
   attr_reader :games,
               :game_teams,
               :teams
@@ -250,6 +252,14 @@ class StatTracker
 
   def most_goals_scored(team_id)
     team = find_team(team_id)
+    game = team.games.max_by{|game|team.our_stats_in_game(game, team.id).goals}
+    our_stats_in_game(game, team.id).goals
+  end
+
+  def fewest_goals_scored(team_id)
+    team = find_team(team_id)
+    game = team.games.min_by{|game|team.our_stats_in_game(game, team.id).goals}
+    our_stats_in_game(game, team.id).goals
   end
 
 end
