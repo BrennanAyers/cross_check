@@ -165,4 +165,10 @@ class StatTrackerTest < Minitest::Test
     assert_equal 2, @stat_tracker.fewest_goals_scored('6')
   end
 
+  def test_returns_favorite_opponent
+
+  end
+
+  def test_returns_head_to_head_stats
+  end
 end

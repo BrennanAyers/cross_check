@@ -262,4 +262,8 @@ class StatTracker
     our_stats_in_game(game, team.id).goals
   end
 
+  def head_to_head(team_id)
+
+  end
+
 end

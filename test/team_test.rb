@@ -65,6 +65,23 @@ class TeamTest < Minitest::Test
     assert_equal 0.0, @team.away_win_percentage
   end
 
+  def test_returns_win_percentage_versus_rival
+
+    game_team_1 = mock
+    game_team_1.stubs(won: "TRUE", team_id: 1)
+    @game_1.add(game_team_1)
+    game_team_2 = mock
+    game_team_2.stubs(won: "TRUE", team_id: 1)
+    @game_2.add(game_team_2)
+    game_team_3 = mock
+    game_team_3.stubs(won: "TRUE", team_id: 1)
+    @game_3.add(game_team_3)
+    game_team_4 = mock
+    game_team_4.stubs(won: "FALSE", team_id: 1)
+    @game_4.add(game_team_4)
+    assert_equal 0.5, @team.win_percentage_versus(3)
+  end
+
 
 
 end

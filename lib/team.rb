@@ -66,4 +66,10 @@ class Team
     end.fdiv(number_of_away_games).round(2)
   end
 
+  def win_percentage_versus(rival_id)
+    rival_games = @games.select{|game| game.home_team_id == rival_id || game.away_team_id == rival_id}
+    win_count = rival_games.count{|game| our_stats_in_game(game, @id).won == "TRUE"}
+    win_count.fdiv(rival_games.size).round(2)
+  end
+
 end
