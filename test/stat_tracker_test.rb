@@ -115,7 +115,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_best_fans
-    assert_equal "Flyers", @stat_tracker.best_fans
+    assert_equal "Capitals", @stat_tracker.best_fans
   end
 
   def test_returns_worst_fans
@@ -124,9 +124,9 @@ class StatTrackerTest < Minitest::Test
 
   def test_returns_team_info
     expected = {"team_id"      => "6",
-                "franchiseid"  => "6",
-                "shortname"    => "Boston",
-                "teamname"     => "Bruins",
+                "franchise_id"  => "6",
+                "short_name"    => "Boston",
+                "team_name"     => "Bruins",
                 "abbreviation" => "BOS",
                 "link"         => "/api/v1/teams/6"}
 
@@ -152,10 +152,10 @@ class StatTrackerTest < Minitest::Test
 
     assert_equal 20132014, team.worst_season
   end
-  # 
-  # def test_returns_average_win_percentage
-  #   # assert_equal 0.5, @stat_tracker.average_win_percentage('6')
-  # end
+  #
+  def test_returns_average_win_percentage
+     assert_equal 0.75, @stat_tracker.average_win_percentage('6')
+  end
 
 
 

@@ -223,26 +223,33 @@ class StatTracker
     end.map(&:teamname)
   end
 
+  def find_team(team_id)
+    @teams.find {|team| team.id.to_s == team_id}
+  end
+
   def team_info(team_id)
-    team = @teams.find {|team| team.id.to_s == team_id}
-    {"team_id" => team.id.to_s, "franchiseid" => team.franchiseid.to_s, "shortname" => team.shortname, "teamname" => team.teamname, "abbreviation" => team.abbreviation, "link" => team.link}
+    team = find_team(team_id)
+    {"team_id" => team.id.to_s, "franchise_id" => team.franchiseid.to_s, "short_name" => team.shortname, "team_name" => team.teamname, "abbreviation" => team.abbreviation, "link" => team.link}
   end
 
   def best_season(team_id)
-    team = @teams.find {|team| team.id.to_s == team_id}
+    team = find_team(team_id)
     best_season = team.seasons.max_by {|season| season.win_percentage}
     best_season.id
   end
 
   def worst_season(team_id)
-    team = @teams.find {|team| team.id.to_s == team_id}
+    team = find_team(team_id)
     worst_season = team.seasons.min_by {|season| season.win_percentage}
     worst_season.id
   end
 
-  # def average_win_percentage(team_id)
-  #   team = @teams.select{|team| team.id.to_s == team_id}
-  #   team.games
-  # end
+  def average_win_percentage(team_id)
+    find_team(team_id).win_percentage
+  end
+
+  def most_goals_scored(team_id)
+    team = find_team(team_id)
+  end
 
 end

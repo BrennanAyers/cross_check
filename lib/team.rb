@@ -51,19 +51,19 @@ class Team
   def win_percentage
     @games.count do |game|
       game.home_team_id == @id && game.outcome.start_with?('home') ||   game.away_team_id == @id && game.outcome.start_with?('away')
-    end.fdiv(@games.count)
+    end.fdiv(@games.count).round(2)
   end
 
   def home_win_percentage
     @games.count do |game|
       game.home_team_id == @id && game.outcome.start_with?('home')
-    end.fdiv(number_of_home_games)
+    end.fdiv(number_of_home_games).round(2)
   end
 
   def away_win_percentage
     @games.count do |game|
       game.away_team_id == @id && game.outcome.start_with?('away')
-    end.fdiv(number_of_away_games)
+    end.fdiv(number_of_away_games).round(2)
   end
 
 end
