@@ -7,12 +7,25 @@ require 'mocha/minitest'
 class TeamTest < Minitest::Test
 
   def setup
-    info = {team_id: 1, franchiseid: 23, shortname: "New Jersey", teamname: "Devils", abbreviation: "NJD", link: "/api/v1/teams/1"}
-    @team = Team.new(info)
-    @game = mock("Game 1")
-    @game.stubs(season: "20122013", type: "R")
-    @game_2 = mock("Game 2")
-    @game_2.stubs(season: "20132014", type: "R")
+    team_info = {team_id: 1, franchiseid: 23, shortname: "New Jersey", teamname: "Devils", abbreviation: "NJD", link: "/api/v1/teams/1"}
+    @team = Team.new(team_info)
+
+    game_info_1 = {game_id: 2012030221, season: 20122013, type: "P", date_time: "2013-05-10", away_team_id: 1, home_team_id: 3, away_goals: 2, home_goals: 3, outcome: "home win OT", home_rink_side_start: "left", venue: "TD Garden", venue_link: "/api/v1/venues/null", venue_time_zone_id: "America/New_York", venue_time_zone_offset: -4, venue_time_zone_tz: "EDT"}
+    @game_1 = Game.new(game_info_1)
+
+    game_info_2 = {game_id: 2012030222, season: 20122013, type: "P", date_time: "2013-05-12", away_team_id: 6, home_team_id: 1, away_goals: 2, home_goals: 3, outcome: "home win OT", home_rink_side_start: "left", venue: "TD Garden", venue_link: "/api/v1/venues/null", venue_time_zone_id: "America/New_York", venue_time_zone_offset: -4, venue_time_zone_tz: "EDT"}
+    @game_2 = Game.new(game_info_2)
+
+    game_info_3 = {game_id: 2012030223, season: 20122013, type: "P", date_time: "2013-05-14", away_team_id: 1, home_team_id: 6, away_goals: 2, home_goals: 3, outcome: "home win OT", home_rink_side_start: "left", venue: "TD Garden", venue_link: "/api/v1/venues/null", venue_time_zone_id: "America/New_York", venue_time_zone_offset: -4, venue_time_zone_tz: "EDT"}
+    @game_3 = Game.new(game_info_3)
+
+    game_info_4 = {game_id: 2012030224, season: 20122013, type: "P", date_time: "2013-05-16", away_team_id: 3, home_team_id: 1, away_goals: 2, home_goals: 3, outcome: "home win OT", home_rink_side_start: "left", venue: "TD Garden", venue_link: "/api/v1/venues/null", venue_time_zone_id: "America/New_York", venue_time_zone_offset: -4, venue_time_zone_tz: "EDT"}
+    @game_4 = Game.new(game_info_4)
+
+    @team.add(@game_1)
+    @team.add(@game_2)
+    @team.add(@game_3)
+    @team.add(@game_4)
   end
 
   def test_it_exists
@@ -29,34 +42,29 @@ class TeamTest < Minitest::Test
   end
 
   def test_can_add_game
-    @team.add(@game)
-    assert_equal [@game], @team.games
-    @team.add(@game_2)
-    assert_equal [@game, @game_2], @team.games
+
+    assert_equal [@game_1, @game_2, @game_3, @game_4], @team.games
   end
 
   def test_can_generate_seasons
-    @team.add(@game)
-    @team.add(@game_2)
+
     @team.generate_seasons
 
-    assert_equal 2, @team.seasons.length
+    assert_equal 1, @team.seasons.length
   end
 
-#Maybe inadequate
-  # def test_finds_own_stats
-  #
-  #   game_stat = mock(team_id: 1)
-  #   game_stat_2 = mock(team_id: 3)
-  #   assert_equal game_stat, [game_stat,
-  #   game_stat_2].select{|stats| stats.team_id == 1}.pop
-  # end
-  #
-  # def test_finds_rival_stats
-  #   game_stat = mock(team_id: 1)
-  #   game_stat_2 = mock(team_id: 3)
-  #   assert_equal game_stat_2, [game_stat,
-  #   game_stat_2].select{|stats| stats.team_id == 3}.pop
-  # end
+  def test_returns_win_percentage
+    assert_equal 0.5, @team.win_percentage
+  end
+
+  def test_returns_home_win_percentage
+    assert_equal 1.0, @team.home_win_percentage
+  end
+
+  def test_returns_away_win_percentage
+    assert_equal 0.0, @team.away_win_percentage
+  end
+
+
 
 end

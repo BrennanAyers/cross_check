@@ -143,4 +143,20 @@ class StatTrackerTest < Minitest::Test
     assert_equal 20122013, team.best_season
   end
 
+  def test_returns_worst_season_by_team
+    season_1 = mock
+    season_1.stubs(win_percentage: 0.55, id: 20122013)
+    season_2 = mock
+    season_2.stubs(win_percentage: 0.45, id: 20132014)
+    team = mock(worst_season: [season_1, season_2].min_by {|season| season.win_percentage}.id)
+
+    assert_equal 20132014, team.worst_season
+  end
+  # 
+  # def test_returns_average_win_percentage
+  #   # assert_equal 0.5, @stat_tracker.average_win_percentage('6')
+  # end
+
+
+
 end
