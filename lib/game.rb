@@ -47,10 +47,15 @@ class Game
   end
 
   def winners_id
-    @outcome.start_with?('away') ?  @away_team_id : @home_team_id 
+    @outcome.start_with?('away') ?  @away_team_id : @home_team_id
   end
   def losers_id
       @outcome.start_with?('home') ? @away_team_id : @home_team_id
+  end
+
+  def goals_for_team(id)
+    return @away_goals if id == @away_team_id
+    return @home_goals if id == @home_team_id
   end
 
 end
