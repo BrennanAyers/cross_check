@@ -274,7 +274,15 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_least_accurate_team
-  assert_equal "Flyers", @stat_tracker_season.least_accurate_team("20152016")
+    assert_equal "Flyers", @stat_tracker_season.least_accurate_team("20152016")
+  end
+
+  def test_returns_most_hits
+    assert_equal "Rangers", @stat_tracker_season.most_hits("20152016")
+  end
+
+  def test_returns_least_hits
+    assert_equal "Bruins", @stat_tracker_season.least_hits("20152016")
   end
 
 end
