@@ -9,6 +9,7 @@ require './lib/team'
 require './lib/stat_tracker.rb'
 require './lib/season'
 require './lib/team_specific_stats'
+require 'mocha/minitest'
 
 SimpleCov.formatter = SimpleCov::Formatter::Console
 
