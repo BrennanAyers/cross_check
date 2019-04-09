@@ -240,8 +240,7 @@ class StatTracker
   def rival(team_id)
     focus = find_team(team_id)
     teams = @teams - [focus]
-    teams.min_by {|team|
-       focus.win_percentage_versus(team.id)}.teamname
+    teams.min_by {|team| focus.win_percentage_versus(team.id)}.teamname
   end
 
   def biggest_team_blowout(team_id)
