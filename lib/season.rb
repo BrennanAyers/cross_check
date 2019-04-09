@@ -88,4 +88,8 @@ class Season
     avg.nan? ? 0.0 : avg
   end
 
+  def coach_name
+    our_stats_in_game(games.first, @team_id).head_coach
+  end
+
 end
