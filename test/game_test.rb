@@ -45,5 +45,12 @@ class GameTest < Minitest::Test
     assert_equal [game_team, game_team_2], @game.team_stats
   end
 
+  def test_returns_winners_id
+    assert_equal 6, @game.winners_id
+  end
+  def test_returns_losers_id
+    assert_equal 6, @game.winners_id
+  end
+
 
 end

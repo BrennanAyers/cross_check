@@ -46,4 +46,9 @@ class Game
     @team_stats << game_team
   end
 
+  def winners_id
+    return @away_team_id if @outcome.start_with?('away')
+    return @home_team_id if @outcome.start_with?('home')
+  end
+
 end
