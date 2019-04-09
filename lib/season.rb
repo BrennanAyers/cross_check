@@ -34,7 +34,8 @@ class Season
   end
 
   def post_season_win_percentage
-    post_season_games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(post_season_games.length).round(2)
+    avg = post_season_games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(post_season_games.length).round(2)
+    avg.nan? ? 0.0 : avg
   end
 
   def shot_accuracy
@@ -74,7 +75,8 @@ class Season
   end
 
   def post_season_average_goals
-    post_season_goals.fdiv(post_season_games.length).round(2)
+    avg = post_season_goals.fdiv(post_season_games.length).round(2)
+    avg.nan? ? 0.0 : avg
   end
 
   def regular_season_average_goals_against
@@ -82,7 +84,8 @@ class Season
   end
 
   def post_season_average_goals_against
-    post_season_goals_against.fdiv(post_season_games.length).round(2)
+    avg = post_season_goals_against.fdiv(post_season_games.length).round(2)
+    avg.nan? ? 0.0 : avg
   end
 
 end
