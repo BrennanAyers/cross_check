@@ -182,6 +182,19 @@ class StatTrackerTest < Minitest::Test
     assert_equal 'Flyers', @stat_tracker_medium.favorite_opponent('6')
   end
 
+  def test_returns_rival
+    assert_equal "Capitals", @stat_tracker_medium.rival("6")
+  end
+
+  def test_returns_biggest_team_blowout
+    assert_equal 3, @stat_tracker_medium.biggest_team_blowout("6")
+  end
+
+  def test_returns_worst_loss
+    assert_equal 5, @stat_tracker_medium.worst_loss("4")
+  end
+
   def test_returns_head_to_head_stats
+
   end
 end
