@@ -28,7 +28,17 @@ class StatTrackerTest < Minitest::Test
 
     @stat_tracker_medium = StatTracker.from_csv(medium_locations)
 
+    season_game_path       = './data/sample/season_game_sample.csv'
+    season_team_path       = './data/sample/team_info_sample.csv'
+    season_game_teams_path = './data/sample/medium_game_teams_stats_sample.csv'
 
+    season_locations = {
+      games: season_game_path,
+      teams: season_team_path,
+      game_teams: season_game_teams_path
+    }
+
+    @stat_tracker_season = StatTracker.from_csv(season_locations)
   end
 
   def test_it_exists
@@ -242,4 +252,13 @@ class StatTrackerTest < Minitest::Test
 
     assert_equal expected, @stat_tracker_medium.seasonal_summary("6")
   end
+
+  def test_returns_biggest_bust
+    assert_equal "Capitals", @stat_tracker_season.biggest_bust("20152016")
+  end
+
+  def test_returns_biggest_surprise
+    assert_equal "Rangers", @stat_tracker_season.biggest_surprise("20152016")
+  end
+
 end
