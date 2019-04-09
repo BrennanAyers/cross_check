@@ -38,15 +38,20 @@ class TeamTest < Minitest::Test
   end
 
   def test_can_add_game
-
     assert_equal [@game_1, @game_2, @game_3, @game_4], @team.games
   end
 
   def test_can_generate_seasons
-
     @team.generate_seasons
-
     assert_equal 1, @team.seasons.length
+  end
+
+  def test_returns_number_of_home_games
+    assert_equal 2, @team.number_of_home_games
+  end
+
+  def test_returns_number_of_away_games
+    assert_equal 2, @team.number_of_away_games
   end
 
   def test_returns_win_percentage
@@ -62,7 +67,6 @@ class TeamTest < Minitest::Test
   end
 
   def test_returns_win_percentage_versus_rival
-
     game_team_1 = mock
     game_team_1.stubs(won: "TRUE", team_id: 1)
     @game_1.add(game_team_1)
@@ -78,6 +82,11 @@ class TeamTest < Minitest::Test
     assert_equal 0.5, @team.win_percentage_versus(3)
   end
 
-
+  def test_returns_coach_by_season
+    @team.generate_seasons
+    @team.seasons.first.stubs(coach_name: "Johhny Flapjacks")
+    
+    assert_equal "Johhny Flapjacks", @team.coach_by_season("20122013")
+  end
 
 end
