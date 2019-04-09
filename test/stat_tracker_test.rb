@@ -16,6 +16,21 @@ class StatTrackerTest < Minitest::Test
     }
 
     @stat_tracker = StatTracker.from_csv(locations)
+
+
+    medium_game_path       = './data/sample/medium_game_sample.csv'
+    medium_team_path       = './data/sample/medium_team_info_sample.csv'
+    medium_game_teams_path = './data/sample/game_teams_stats_sample.csv'
+
+    medium_locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+
+    @stat_tracker_medium = StatTracker.from_csv(medium_locations)
+
+
   end
 
   def test_it_exists
@@ -166,7 +181,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_favorite_opponent
-    assert_equal 'Rangers', @stat_tracker.favorite_opponent('6')
+    assert_equal 'Rangers', @stat_tracker_medium.favorite_opponent('6')
   end
 
   def test_returns_head_to_head_stats
