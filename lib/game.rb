@@ -58,18 +58,4 @@ class Game
     return @home_goals if id == @home_team_id
   end
 
-  def test_returns_winners_id
-    assert_equal 6, @game.winners_id
-  end
-
-  def test_returns_losers_id
-    assert_equal 3, @game.losers_id
-  end
-
-  def test_returns_goals_for_a_team
-    assert_equal 2, @game.goals_for_team(3)
-    assert_equal 3, @game.goals_for_team(6)
-  end
-  
-
 end
