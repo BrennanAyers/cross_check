@@ -269,4 +269,12 @@ class StatTrackerTest < Minitest::Test
     assert_equal "John Tortorella", @stat_tracker_season.worst_coach("20152016")
   end
 
+  def test_returns_most_accurate_team
+    assert_equal "Capitals", @stat_tracker_season.most_accurate_team("20152016")
+  end
+
+  def test_returns_least_accurate_team
+  assert_equal "Flyers", @stat_tracker_season.least_accurate_team("20152016")
+  end
+
 end
