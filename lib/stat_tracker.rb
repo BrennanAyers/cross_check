@@ -272,4 +272,28 @@ class StatTracker
     hash
   end
 
+  def seasonal_summary(team_id)
+    hash = {}
+    team = find_team(team_id)
+    team.seasons.each do |season|
+      hash[season.id] = {
+        postseason: {
+          win_percentage: season.post_season_win_percentage,
+          total_goals_scored: season.post_season_goals,
+          total_goals_against: season.post_season_goals_against,
+          average_goals_scored: season.post_season_average_goals,
+          average_goals_against: season.post_season_average_goals_against
+        },
+        regular_season: {
+          win_percentage: season.regular_season_win_percentage,
+          total_goals_scored: season.regular_season_goals,
+          total_goals_against: season.regular_season_goals_against,
+          average_goals_scored: season.regular_season_average_goals,
+          average_goals_against: season.regular_season_average_goals_against
+        }
+      }
+    end
+    hash
+  end
+
 end
