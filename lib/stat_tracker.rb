@@ -312,4 +312,20 @@ class StatTracker
     end.teamname
   end
 
+  def winningest_coach(season_id)
+    teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
+    teams.max_by do |team|
+      focus = team.seasons.find {|season| season.id.to_s == season_id}
+      focus.win_percentage
+    end.coach_by_season(season_id)
+  end
+
+  def worst_coach(season_id)
+    teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
+    teams.min_by do |team|
+      focus = team.seasons.find {|season| season.id.to_s == season_id}
+      focus.win_percentage
+    end.coach_by_season(season_id)
+  end
+
 end
