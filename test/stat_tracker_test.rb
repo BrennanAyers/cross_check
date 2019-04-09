@@ -17,13 +17,13 @@ class StatTrackerTest < Minitest::Test
 
 
     medium_game_path       = './data/sample/medium_game_sample.csv'
-    medium_team_path       = './data/sample/medium_team_info_sample.csv'
-    medium_game_teams_path = './data/sample/game_teams_stats_sample.csv'
+    medium_team_path       = './data/sample/team_info_sample.csv'
+    medium_game_teams_path = './data/sample/medium_game_teams_stats_sample.csv'
 
     medium_locations = {
-      games: game_path,
-      teams: team_path,
-      game_teams: game_teams_path
+      games: medium_game_path,
+      teams: medium_team_path,
+      game_teams: medium_game_teams_path
     }
 
     @stat_tracker_medium = StatTracker.from_csv(medium_locations)
