@@ -262,6 +262,39 @@ class StatTracker
     our_stats_in_game(game, team.id).goals
   end
 
+#NO TESTS
+  def favorite_opponent(team_id)
+    focus = find_team(team_id)
+    teams = @teams - [focus]
+    teams.max_by {|team|
+       focus.win_percentage_versus(team.id)}.teamname
+  end
+
+  def rival(team_id)
+    focus = find_team(team_id)
+    teams = @teams - [focus]
+    teams.min_by {|team|
+       focus.win_percentage_versus(team.id)}.teamname
+  end
+
+  def biggest_team_blowout(team_id)
+    team = find_team(team_id)
+    team.games.max_by do |game|
+      our_goals = team.our_stats_in_game(game, team.id)
+      their_goals = game.goals - our_goals
+      our_goals - their_goals
+    end
+  end
+
+  def worst_loss(team_id)
+    team = find_team(team_id)
+    team.games.min_by do |game|
+      our_goals = team.our_stats_in_game(game, team.id)
+      their_goals = game.goals - our_goals
+      our_goals - their_goals
+    end
+  end
+
   def head_to_head(team_id)
 
   end

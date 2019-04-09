@@ -72,4 +72,6 @@ class Team
     win_count.fdiv(rival_games.size).round(2)
   end
 
+
+
 end

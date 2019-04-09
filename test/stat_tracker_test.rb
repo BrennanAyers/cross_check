@@ -166,7 +166,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_favorite_opponent
-
+    assert_equal 'Rangers', @stat_tracker.favorite_opponent('6')
   end
 
   def test_returns_head_to_head_stats
