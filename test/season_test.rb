@@ -1,6 +1,4 @@
-require 'csv'
-require 'mocha/minitest'
-require './lib/season'
+require './test/test_helper'
 
 class SeasonTest < MiniTest::Test
 

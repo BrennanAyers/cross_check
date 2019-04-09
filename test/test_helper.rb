@@ -1,6 +1,7 @@
 require 'simplecov'
 require 'simplecov-console'
 require 'minitest/autorun'
+require 'minitest/pride'
 require 'csv'
 require './lib/game_team'
 require './lib/game'

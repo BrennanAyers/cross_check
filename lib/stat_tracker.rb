@@ -45,38 +45,6 @@ class StatTracker
     end
   end
 
-
-  # def generate_teams_1(teams_table)
-  #   hash = {}
-  #   @games.each do |game|
-  #     if  hash.keys.include?(game.away_team_id)
-  #       hash[game.away_team_id] << game
-  #     else
-  #       hash[game.away_team_id] = [game]
-  #     end
-  #     if hash.keys.include?(game.home_team_id)
-  #       hash[game.home_team_id] << game
-  #     else
-  #       hash[game.home_team_id] = [game]
-  #     end
-  #   end
-  #
-  # end
-  # #
-  #
-  #   @teams = teams_table.map{|team_info| Team.new(team_info)}
-  #   @teams.each do |team|
-  #     games = hash[team.id]
-  #     games.each{|game| team.add(game)}
-  #   end
-
-  #   @teams = teams_table.map{|team_info| Team.new(team_info)}
-  #   @teams.each do |team|
-  #     @games.each{|game|team.add(game) if game.away_team_id == team.id || game.home_team_id == team.id}
-  #     team.generate_seasons
-  #   end
-  # end
-
   def highest_total_score
     @games.max_by{|game|game.score}.score
   end
