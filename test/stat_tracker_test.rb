@@ -197,7 +197,7 @@ class StatTrackerTest < Minitest::Test
   def test_returns_head_to_head_stats
     expected = {
       "Rangers" => 0.75,
-      "Capitals" => 1.0,
+      "Capitals" => 0.5,
       "Flyers" => 1.0
     }
 

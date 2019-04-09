@@ -262,7 +262,14 @@ class StatTracker
   end
 
   def head_to_head(team_id)
+    hash = {}
+    focus = find_team(team_id)
+    teams = @teams - [focus]
 
+    teams.each do |team|
+      hash[team.teamname] = focus.win_percentage_versus(team.id)
+    end
+    hash
   end
 
 end
