@@ -195,6 +195,12 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_head_to_head_stats
+    expected = {
+      "Rangers" => 0.75,
+      "Capitals" => 1.0,
+      "Flyers" => 1.0
+    }
 
+    assert_equal expected, @stat_tracker_medium.head_to_head("6")
   end
 end
