@@ -1,6 +1,4 @@
-require 'csv'
-require 'mocha/minitest'
-require './lib/season'
+require './test/test_helper'
 
 class SeasonTest < MiniTest::Test
 
@@ -29,12 +27,13 @@ class SeasonTest < MiniTest::Test
     @game_4_team_stats.stubs(find: @game_4_find)
     @game_4 = mock("Game 4")
     @game_4.stubs(type: "P", team_stats: @game_4_team_stats)
-    @season = Season.new([@game_1, @game_2, @game_3, @game_4], 1)
+    @season = Season.new([@game_1, @game_2, @game_3, @game_4], 1, 20122013)
   end
 
   def test_has_argument_attributes
     assert_equal [@game_1, @game_2, @game_3, @game_4], @season.games
     assert_equal 1, @season.team_id
+    assert_equal 20122013, @season.id
   end
 
   def test_has_regular_and_post_season_games

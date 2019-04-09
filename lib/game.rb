@@ -15,7 +15,7 @@ class Game
               :venue_time_zone_offset,
               :venue_time_zone_tz,
               :score,
-              :team_stats
+              :team_stats,
               :total_goals
 
   def initialize(info)

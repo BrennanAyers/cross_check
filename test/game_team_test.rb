@@ -1,6 +1,5 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/game_team'
+require './test/test_helper'
+
 class GameTeamTest < Minitest::Test
   def setup
     info = {game_id: 2012030221, team_id: 3, hoa: "away", won: "FALSE", settled_in: "OT", head_coach: "John Tortorella", goals: 2, shots: 35, hits: 44, pim: 8, powerplayopportunities: 3, powerplaygoals: 0, faceoffwinpercentage: 44.8, giveaways: 17, takeaways: 7}

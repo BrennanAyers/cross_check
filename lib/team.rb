@@ -34,7 +34,7 @@ class Team
       games_in_season = @games.select do |game|
         game.season == season
       end
-      @seasons << Season.new(games_in_season, @id)
+      @seasons << Season.new(games_in_season, @id, season)
     end
   end
 
@@ -48,16 +48,30 @@ class Team
     @games.count{|game| game.away_team_id == @id}
   end
 
+  def win_percentage
+    @games.count do |game|
+      game.home_team_id == @id && game.outcome.start_with?('home') ||   game.away_team_id == @id && game.outcome.start_with?('away')
+    end.fdiv(@games.count).round(2)
+  end
+
   def home_win_percentage
     @games.count do |game|
-      our_stats_in_game(game).hoa == "home" && our_stats_in_game(game).won == "TRUE"
-    end.fdiv(number_of_home_games)
+      game.home_team_id == @id && game.outcome.start_with?('home')
+    end.fdiv(number_of_home_games).round(2)
   end
 
   def away_win_percentage
     @games.count do |game|
-      our_stats_in_game(game).hoa == "away" && our_stats_in_game(game).won == "TRUE"
-    end.fdiv(number_of_away_games)
+      game.away_team_id == @id && game.outcome.start_with?('away')
+    end.fdiv(number_of_away_games).round(2)
   end
+
+  def win_percentage_versus(rival_id)
+    rival_games = @games.select{|game| game.home_team_id == rival_id || game.away_team_id == rival_id}
+    win_count = rival_games.count{|game| our_stats_in_game(game, @id).won == "TRUE"}
+    win_count.fdiv(rival_games.size).round(2)
+  end
+
+
 
 end

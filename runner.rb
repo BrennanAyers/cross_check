@@ -1,4 +1,5 @@
 require './lib/stat_tracker'
+require './lib/stat_tracker_2'
 
 game_path = './data/actual/game.csv'
 team_path = './data/actual/team_info.csv'
@@ -11,6 +12,15 @@ locations = {
 }
 
 
-stattrack = StatTracker.from_csv(locations)
+stat_tracker = StatTracker.from_csv(locations)
 
-require 'pry'; binding.pry
+require 'benchmark'
+
+array = (1..1000000).map { rand }
+
+require "pry"; binding.pry
+require 'benchmark'
+Benchmark.bmbm do |x|
+  x.report("base") { StatTracker.from_csv(locations) }
+  # x.report("hash") { StatTracker2.from_csv(locations) }
+end

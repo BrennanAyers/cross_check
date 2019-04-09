@@ -6,13 +6,15 @@ class Season
   attr_reader :regular_season_games,
               :post_season_games,
               :games,
-              :team_id
+              :team_id,
+              :id
 
-  def initialize(games, team_id)
+  def initialize(games, team_id, season_id)
     @regular_season_games = regular_season_sort(games)
     @post_season_games    = post_season_sort(games)
     @games                = games
     @team_id              = team_id
+    @id                   = season_id
   end
 
   def regular_season_sort(games)
@@ -24,47 +26,48 @@ class Season
   end
 
   def win_percentage
-    games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(games.length)
+    games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(games.length)
   end
 
   def regular_season_win_percentage
-    regular_season_games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(regular_season_games.length).round(2)
+    regular_season_games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(regular_season_games.length).round(2)
   end
 
   def post_season_win_percentage
-    post_season_games.count {|game| our_stats_in_game(game).won == "TRUE"}.fdiv(post_season_games.length).round(2)
+    avg = post_season_games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(post_season_games.length).round(2)
+    avg.nan? ? 0.0 : avg
   end
 
   def shot_accuracy
-    shots = games.sum {|game| our_stats_in_game(game).shots}
-    goals = games.sum {|game| our_stats_in_game(game).goals}
+    shots = games.sum {|game| our_stats_in_game(game, @team_id).shots}
+    goals = games.sum {|game| our_stats_in_game(game, @team_id).goals}
     goals.fdiv(shots).round(2)
   end
 
   def number_of_hits
-    games.sum {|game| our_stats_in_game(game).hits}
+    games.sum {|game| our_stats_in_game(game, @team_id).hits}
   end
 
   def power_play_goal_percentage
-    power_play_goals = games.sum {|game| our_stats_in_game(game).powerplaygoals}
-    goals = games.sum {|game| our_stats_in_game(game).goals}
+    power_play_goals = games.sum {|game| our_stats_in_game(game, @team_id).powerplaygoals}
+    goals = games.sum {|game| our_stats_in_game(game, @team_id).goals}
     power_play_goals.fdiv(goals).round(2)
   end
 
   def regular_season_goals
-    regular_season_games.sum {|game| our_stats_in_game(game).goals}
+    regular_season_games.sum {|game| our_stats_in_game(game, @team_id).goals}
   end
 
   def post_season_goals
-    post_season_games.sum {|game| our_stats_in_game(game).goals}
+    post_season_games.sum {|game| our_stats_in_game(game, @team_id).goals}
   end
 
   def regular_season_goals_against
-    regular_season_games.sum {|game| rival_stats_in_game(game).goals}
+    regular_season_games.sum {|game| rival_stats_in_game(game, @team_id).goals}
   end
 
   def post_season_goals_against
-    post_season_games.sum {|game| rival_stats_in_game(game).goals}
+    post_season_games.sum {|game| rival_stats_in_game(game, @team_id).goals}
   end
 
   def regular_season_average_goals
@@ -72,7 +75,8 @@ class Season
   end
 
   def post_season_average_goals
-    post_season_goals.fdiv(post_season_games.length).round(2)
+    avg = post_season_goals.fdiv(post_season_games.length).round(2)
+    avg.nan? ? 0.0 : avg
   end
 
   def regular_season_average_goals_against
@@ -80,7 +84,8 @@ class Season
   end
 
   def post_season_average_goals_against
-    post_season_goals_against.fdiv(post_season_games.length).round(2)
+    avg = post_season_goals_against.fdiv(post_season_games.length).round(2)
+    avg.nan? ? 0.0 : avg
   end
 
 end
