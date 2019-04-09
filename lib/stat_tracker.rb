@@ -230,7 +230,6 @@ class StatTracker
     our_stats_in_game(game, team.id).goals
   end
 
-#NO TESTS
   def favorite_opponent(team_id)
     focus = find_team(team_id)
     teams = @teams - [focus]
