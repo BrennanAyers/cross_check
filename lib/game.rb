@@ -16,6 +16,7 @@ class Game
               :venue_time_zone_tz,
               :score,
               :team_stats
+              :total_goals
 
   def initialize(info)
     @id = info[:game_id]

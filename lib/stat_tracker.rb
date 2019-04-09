@@ -280,19 +280,19 @@ class StatTracker
   def biggest_team_blowout(team_id)
     team = find_team(team_id)
     team.games.max_by do |game|
-      our_goals = team.our_stats_in_game(game, team.id)
-      their_goals = game.goals - our_goals
+      our_goals = team.our_stats_in_game(game, team.id).goals
+      their_goals = game.score - our_goals
       our_goals - their_goals
-    end
+    end.score_differential
   end
 
   def worst_loss(team_id)
     team = find_team(team_id)
     team.games.min_by do |game|
-      our_goals = team.our_stats_in_game(game, team.id)
-      their_goals = game.goals - our_goals
+      our_goals = team.our_stats_in_game(game, team.id).goals
+      their_goals = game.score - our_goals
       our_goals - their_goals
-    end
+    end.score_differential
   end
 
   def head_to_head(team_id)
