@@ -296,4 +296,20 @@ class StatTracker
     hash
   end
 
+  def biggest_bust(season_id)
+    teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
+    teams.max_by do |team|
+      focus = team.seasons.find {|season| season.id.to_s == season_id}
+      focus.regular_season_win_percentage - focus.post_season_win_percentage
+    end.teamname
+  end
+
+  def biggest_surprise(season_id)
+    teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
+    teams.min_by do |team|
+      focus = team.seasons.find {|season| season.id.to_s == season_id}
+      focus.regular_season_win_percentage - focus.post_season_win_percentage
+    end.teamname
+  end
+
 end
