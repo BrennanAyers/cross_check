@@ -49,7 +49,7 @@ class GameTest < Minitest::Test
     assert_equal 6, @game.winners_id
   end
   def test_returns_losers_id
-    assert_equal 6, @game.winners_id
+    assert_equal 3, @game.losers_id
   end
 
 

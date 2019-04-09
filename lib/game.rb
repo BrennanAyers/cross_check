@@ -47,8 +47,10 @@ class Game
   end
 
   def winners_id
-    return @away_team_id if @outcome.start_with?('away')
-    return @home_team_id if @outcome.start_with?('home')
+    @outcome.start_with?('away') ?  @away_team_id : @home_team_id 
+  end
+  def losers_id
+      @outcome.start_with?('home') ? @away_team_id : @home_team_id
   end
 
 end
