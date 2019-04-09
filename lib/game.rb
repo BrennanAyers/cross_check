@@ -70,5 +70,6 @@ class Game
     assert_equal 2, @game.goals_for_team(3)
     assert_equal 3, @game.goals_for_team(6)
   end
+  
 
 end
