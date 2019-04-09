@@ -203,4 +203,25 @@ class StatTrackerTest < Minitest::Test
 
     assert_equal expected, @stat_tracker_medium.head_to_head("6")
   end
+
+  def test_returns_seasonal_summary
+    expected = {
+      regular_season: {
+        win_percentage: 0.75,
+        total_goals_scored: 9,
+        total_goals_against: 7,
+        average_goals_scored: 2.25,
+        average_goals_against: 1.75
+      },
+      post_season: {
+        win_percentage: 0.75,
+        total_goals_scored: 13,
+        total_goals_against: 9,
+        average_goals_scored: 4.25,
+        average_goals_against: 2.25
+      }
+    }
+
+    assert_equal expected, @stat_tracker_medium.seasonal_summary("6")
+  end
 end
