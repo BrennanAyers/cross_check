@@ -211,31 +211,31 @@ class StatTrackerTest < Minitest::Test
           win_percentage: 0.75,
           total_goals_scored: 13,
           total_goals_against: 9,
-          average_goals_scored: 4.25,
+          average_goals_scored: 3.25,
           average_goals_against: 2.25
         },
         regular_season: {
           win_percentage: 0.5,
           total_goals_scored: 5,
           total_goals_against: 7,
-          average_goals_scored: 1.25,
-          average_goals_against: 1.75
+          average_goals_scored: 2.5,
+          average_goals_against: 3.5
         }
       },
       "20152016" => {
         postseason: {
-          win_percentage: 0.0,
-          total_goals_scored: 0,
+          win_percentage: 1.0,
+          total_goals_scored: 2,
           total_goals_against: 0,
-          average_goals_scored: 0,
-          average_goals_against: 0
+          average_goals_scored: 2.0,
+          average_goals_against: 0.0
         },
         regular_season: {
           win_percentage: 1.0,
-          total_goals_scored: 4,
+          total_goals_scored: 2,
           total_goals_against: 0,
-          average_goals_scored: 1,
-          average_goals_against: 0
+          average_goals_scored: 2.0,
+          average_goals_against: 0.0
         }
       }
     }
