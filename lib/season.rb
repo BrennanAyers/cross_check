@@ -26,15 +26,15 @@ class Season
   end
 
   def win_percentage
-    games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(games.length)
+    games.count {|game| game.winners_id == @team_id}.fdiv(games.length)
   end
 
   def regular_season_win_percentage
-    regular_season_games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(regular_season_games.length).round(2)
+    regular_season_games.count {|game| game.winners_id == @team_id}.fdiv(regular_season_games.length).round(2)
   end
 
   def post_season_win_percentage
-    avg = post_season_games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(post_season_games.length).round(2)
+    avg = post_season_games.count {|game| game.winners_id == @team_id}.fdiv(post_season_games.length).round(2)
     avg.nan? ? 0.0 : avg
   end
 
