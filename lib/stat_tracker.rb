@@ -371,4 +371,21 @@ class StatTracker
       focus.shot_accuracy
     end.teamname
   end
+
+  def most_hits(season_id)
+      teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
+      teams.max_by do |team|
+        focus = team.seasons.find {|season| season.id.to_s == season_id}
+        focus.number_of_hits
+      end.teamname
+    end
+
+  def least_hits(season_id)
+      teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
+      teams.min_by do |team|
+        focus = team.seasons.find {|season| season.id.to_s == season_id}
+        focus.number_of_hits
+      end.teamname
+    end
+
 end
