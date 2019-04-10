@@ -1,5 +1,5 @@
 module SeasonStats
-  
+
   def generate_teams(teams_table)
     @teams = teams_table.map{|team_info| Team.new(team_info)}
     @teams.each do |team|
@@ -105,10 +105,9 @@ module SeasonStats
   end
 
   def power_play_goal_percentage(season_id)
-    teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
     power_play_goals = 0
     all_goals = 0
-    teams.each do |team|
+    teams_with_season(season_id).each do |team|
       focus = team.seasons.find {|season| season.id.to_s == season_id}
       power_play_goals += focus.power_play_goals
       all_goals += focus.all_goals
