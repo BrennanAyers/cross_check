@@ -40,7 +40,7 @@ class Season
 
   def shot_accuracy
     shots = games.sum {|game| our_stats_in_game(game, @team_id).shots}
-    goals = games.sum {|game| game.goals_for_team(@team_id)}
+    goals = games.sum {|game| our_stats_in_game(game, @team_id).goals}
     goals.fdiv(shots)
   end
 
@@ -49,7 +49,7 @@ class Season
   end
 
   def all_goals
-    games.sum {|game| game.goals_for_team(@team_id)}
+    games.sum {|game| our_stats_in_game(game, @team_id).goals}
   end
 
   def power_play_goals
