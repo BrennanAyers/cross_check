@@ -8,12 +8,7 @@ class GameTeam
                :goals,
                :shots,
                :hits,
-               :pim,
-               :powerplayopportunities,
-               :powerplaygoals,
-               :faceoffwinpercentage,
-               :giveaways,
-               :takeaways
+               :powerplaygoals
 
   def initialize(info)
     @game_id = info[:game_id]
@@ -25,15 +20,7 @@ class GameTeam
     @goals = info[:goals]
     @shots = info[:shots]
     @hits = info[:hits]
-    @pim = info[:pim]
-    @powerplayopportunities = info[:powerplayopportunities]
     @powerplaygoals = info[:powerplaygoals]
-    @faceoffwinpercentage = info[:faceoffwinpercentage]
-    @giveaways = info[:giveaways]
-    @takeaways = info[:takeaways]
   end
-
-  def score_differential
-    (@away_goals - @home_goals).abs
-  end
+  
 end
