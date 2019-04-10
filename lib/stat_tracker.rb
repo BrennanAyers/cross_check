@@ -363,4 +363,12 @@ class StatTracker
       focus.shot_accuracy
     end.teamname
   end
+
+  def least_accurate_team(season_id)
+    teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
+    teams.min_by do |team|
+      focus = team.seasons.find {|season| season.id.to_s == season_id}
+      focus.shot_accuracy
+    end.teamname
+  end
 end
