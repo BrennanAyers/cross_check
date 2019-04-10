@@ -1,7 +1,7 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/Users/patrickduvall/turing/1module/projects/cross_check/test/game_test.rb": [
+      "/Users/alexandermathieu/turing/1module/projects/cross_check/test/game_test.rb": [
         1,
         null,
         1,
@@ -14,12 +14,6 @@
         1,
         null,
         null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
         1,
         1,
         1,
@@ -63,7 +57,7 @@
         null,
         null
       ],
-      "/Users/patrickduvall/turing/1module/projects/cross_check/test/season_test.rb": [
+      "/Users/alexandermathieu/turing/1module/projects/cross_check/test/season_test.rb": [
         1,
         null,
         1,
@@ -193,7 +187,7 @@
         null,
         null
       ],
-      "/Users/patrickduvall/turing/1module/projects/cross_check/test/stat_tracker_test.rb": [
+      "/Users/alexandermathieu/turing/1module/projects/cross_check/test/stat_tracker_test.rb": [
         1,
         null,
         1,
@@ -487,7 +481,7 @@
         null,
         null
       ],
-      "/Users/patrickduvall/turing/1module/projects/cross_check/test/team_test.rb": [
+      "/Users/alexandermathieu/turing/1module/projects/cross_check/test/team_test.rb": [
         1,
         null,
         1,
@@ -582,6 +576,6 @@
         null
       ]
     },
-    "timestamp": 1554924469
+    "timestamp": 1554926918
   }
 }

@@ -20,12 +20,6 @@ class GameTest < Minitest::Test
     assert_equal 2, @game.away_goals
     assert_equal 3, @game.home_goals
     assert_equal "home win OT", @game.outcome
-    assert_equal "left", @game.home_rink_side_start
-    assert_equal "TD Garden", @game.venue
-    assert_equal "/api/v1/venues/null", @game.venue_link
-    assert_equal "America/New_York", @game.venue_time_zone_id
-    assert_equal (-4), @game.venue_time_zone_offset
-    assert_equal "EDT", @game.venue_time_zone_tz
 
     assert_equal 5, @game.score
   end
@@ -55,6 +49,5 @@ class GameTest < Minitest::Test
     assert_equal 2, @game.goals_for_team(3)
     assert_equal 3, @game.goals_for_team(6)
   end
-  
 
 end
