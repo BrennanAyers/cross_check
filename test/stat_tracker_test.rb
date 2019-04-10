@@ -12,9 +12,7 @@ class StatTrackerTest < Minitest::Test
       teams: team_path,
       game_teams: game_teams_path
     }
-
     @stat_tracker = StatTracker.from_csv(locations)
-
 
     medium_game_path       = './data/sample/medium_game_sample.csv'
     medium_team_path       = './data/sample/team_info_sample.csv'
@@ -25,7 +23,6 @@ class StatTrackerTest < Minitest::Test
       teams: medium_team_path,
       game_teams: medium_game_teams_path
     }
-
     @stat_tracker_medium = StatTracker.from_csv(medium_locations)
 
     season_game_path       = './data/sample/season_game_sample.csv'
@@ -37,7 +34,6 @@ class StatTrackerTest < Minitest::Test
       teams: season_team_path,
       game_teams: season_game_teams_path
     }
-
     @stat_tracker_season = StatTracker.from_csv(season_locations)
   end
 
@@ -53,8 +49,6 @@ class StatTrackerTest < Minitest::Test
   def test_generates_teams
     @stat_tracker.teams.each{|team| assert_instance_of(Team, team)}
   end
-
-  #IT2
 
   def test_returns_highest_total_score
     assert_equal 7, @stat_tracker.highest_total_score
@@ -88,14 +82,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_average_goals_by_season
-    expected = {
-      '20122013' => 5.5,
-      '20152016' => 3.25
+    expected = {'20122013' => 5.5,
+                '20152016' => 3.25
     }
     assert_equal expected, @stat_tracker.average_goals_by_season
   end
-
-  #IT3
 
   def test_returns_count_of_teams
     assert_equal 4, @stat_tracker.count_of_teams
@@ -116,7 +107,7 @@ class StatTrackerTest < Minitest::Test
   def test_returns_worst_defense
     assert_equal "Rangers", @stat_tracker.worst_defense
   end
-  #
+
   def test_returns_highest_scoring_visitor
     assert_equal "Capitals", @stat_tracker.highest_scoring_visitor
   end
@@ -146,12 +137,14 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_returns_team_info
-    expected = {"team_id"      => "6",
-                "franchise_id"  => "6",
-                "short_name"    => "Boston",
-                "team_name"     => "Bruins",
-                "abbreviation" => "BOS",
-                "link"         => "/api/v1/teams/6"}
+    expected = {
+      "team_id"      => "6",
+      "franchise_id"  => "6",
+      "short_name"    => "Boston",
+      "team_name"     => "Bruins",
+      "abbreviation" => "BOS",
+      "link"         => "/api/v1/teams/6"
+              }
 
     assert_equal expected, @stat_tracker.team_info("6")
   end
