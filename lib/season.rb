@@ -26,21 +26,21 @@ class Season
   end
 
   def win_percentage
-    games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(games.length)
+    games.count {|game| game.winners_id == @team_id}.fdiv(games.length)
   end
 
   def regular_season_win_percentage
-    regular_season_games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(regular_season_games.length).round(2)
+    regular_season_games.count {|game| game.winners_id == @team_id}.fdiv(regular_season_games.length).round(2)
   end
 
   def post_season_win_percentage
-    avg = post_season_games.count {|game| our_stats_in_game(game, @team_id).won == "TRUE"}.fdiv(post_season_games.length).round(2)
+    avg = post_season_games.count {|game| game.winners_id == @team_id}.fdiv(post_season_games.length).round(2)
     avg.nan? ? 0.0 : avg
   end
 
   def shot_accuracy
     shots = games.sum {|game| our_stats_in_game(game, @team_id).shots}
-    goals = games.sum {|game| our_stats_in_game(game, @team_id).goals}
+    goals = games.sum {|game| game.goals_for_team(@team_id)}
     goals.fdiv(shots)
   end
 
@@ -49,7 +49,7 @@ class Season
   end
 
   def all_goals
-    games.sum {|game| our_stats_in_game(game, @team_id).goals}
+    games.sum {|game| game.goals_for_team(@team_id)}
   end
 
   def power_play_goals
@@ -57,19 +57,19 @@ class Season
   end
 
   def regular_season_goals
-    regular_season_games.sum {|game| our_stats_in_game(game, @team_id).goals}
+    regular_season_games.sum {|game| game.goals_for_team(@team_id)}
   end
 
   def post_season_goals
-    post_season_games.sum {|game| our_stats_in_game(game, @team_id).goals}
+    post_season_games.sum {|game| game.goals_for_team(@team_id)}
   end
 
   def regular_season_goals_against
-    regular_season_games.sum {|game| rival_stats_in_game(game, @team_id).goals}
+    regular_season_games.sum {|game| game.goals_for_rival_team(@team_id)}
   end
 
   def post_season_goals_against
-    post_season_games.sum {|game| rival_stats_in_game(game, @team_id).goals}
+    post_season_games.sum {|game| game.goals_for_rival_team(@team_id)}
   end
 
   def regular_season_average_goals

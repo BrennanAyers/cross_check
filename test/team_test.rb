@@ -85,7 +85,7 @@ class TeamTest < Minitest::Test
   def test_returns_coach_by_season
     @team.generate_seasons
     @team.seasons.first.stubs(coach_name: "Johhny Flapjacks")
-    
+
     assert_equal "Johhny Flapjacks", @team.coach_by_season("20122013")
   end
 

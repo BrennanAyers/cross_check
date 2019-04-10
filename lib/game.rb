@@ -8,15 +8,8 @@ class Game
               :away_goals,
               :home_goals,
               :outcome,
-              :home_rink_side_start,
-              :venue,
-              :venue_link,
-              :venue_time_zone_id,
-              :venue_time_zone_offset,
-              :venue_time_zone_tz,
               :score,
-              :team_stats,
-              :total_goals
+              :team_stats
 
   def initialize(info)
     @id = info[:game_id]
@@ -28,12 +21,6 @@ class Game
     @away_goals = info[:away_goals]
     @home_goals = info[:home_goals]
     @outcome = info[:outcome]
-    @home_rink_side_start = info[:home_rink_side_start]
-    @venue = info[:venue]
-    @venue_link = info[:venue_link]
-    @venue_time_zone_id = info[:venue_time_zone_id]
-    @venue_time_zone_offset = info[:venue_time_zone_offset]
-    @venue_time_zone_tz = info[:venue_time_zone_tz]
     @score = info[:away_goals] + info[:home_goals]
     @team_stats = []
   end
@@ -49,7 +36,7 @@ class Game
   def winners_id
     @outcome.start_with?('away') ?  @away_team_id : @home_team_id
   end
-  
+
   def losers_id
     @outcome.start_with?('home') ? @away_team_id : @home_team_id
   end
@@ -57,6 +44,10 @@ class Game
   def goals_for_team(id)
     return @away_goals if id == @away_team_id
     return @home_goals if id == @home_team_id
+  end
+
+  def goals_for_rival_team(id)
+    score - goals_for_team(id)
   end
 
 end

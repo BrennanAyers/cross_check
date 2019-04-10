@@ -16,12 +16,7 @@ class GameTeamTest < Minitest::Test
    assert_equal 2, @game_team.goals
    assert_equal 35, @game_team.shots
    assert_equal 44, @game_team.hits
-   assert_equal 8, @game_team.pim
-   assert_equal 3, @game_team.powerplayopportunities
    assert_equal 0, @game_team.powerplaygoals
-   assert_equal 44.8, @game_team.faceoffwinpercentage
-   assert_equal 17, @game_team.giveaways
-   assert_equal 7, @game_team.takeaways
-
   end
+  
 end
