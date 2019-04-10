@@ -356,33 +356,33 @@ class StatTracker
     end.first
   end
 
+  def teams_with_season(season_id)
+    @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
+  end
+
   def most_accurate_team(season_id)
-    teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
-    teams.max_by do |team|
+    teams_with_season(season_id).max_by do |team|
       focus = team.seasons.find {|season| season.id.to_s == season_id}
       focus.shot_accuracy
     end.teamname
   end
 
   def least_accurate_team(season_id)
-    teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
-    teams.min_by do |team|
+    teams_with_season(season_id).min_by do |team|
       focus = team.seasons.find {|season| season.id.to_s == season_id}
       focus.shot_accuracy
     end.teamname
   end
 
   def most_hits(season_id)
-      teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
-      teams.max_by do |team|
+      teams_with_season(season_id).max_by do |team|
         focus = team.seasons.find {|season| season.id.to_s == season_id}
         focus.number_of_hits
       end.teamname
     end
 
   def fewest_hits(season_id)
-      teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
-      teams.min_by do |team|
+      teams_with_season(season_id).min_by do |team|
         focus = team.seasons.find {|season| season.id.to_s == season_id}
         focus.number_of_hits
       end.teamname
