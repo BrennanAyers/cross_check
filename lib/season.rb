@@ -41,7 +41,7 @@ class Season
   def shot_accuracy
     shots = games.sum {|game| our_stats_in_game(game, @team_id).shots}
     goals = games.sum {|game| our_stats_in_game(game, @team_id).goals}
-    goals.fdiv(shots).round(2)
+    goals.fdiv(shots)
   end
 
   def number_of_hits
