@@ -1,5 +1,5 @@
 require 'simplecov'
-require 'simplecov-console'
+SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'csv'
@@ -10,7 +10,3 @@ require './lib/stat_tracker.rb'
 require './lib/season'
 require './lib/team_specific_stats'
 require 'mocha/minitest'
-
-SimpleCov.formatter = SimpleCov::Formatter::Console
-
-SimpleCov.start
