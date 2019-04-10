@@ -1,12 +1,18 @@
 module TeamStats
-  
+
   def find_team(team_id)
     @teams.find {|team| team.id.to_s == team_id}
   end
 
   def team_info(team_id)
     team = find_team(team_id)
-    {"team_id" => team.id.to_s, "franchise_id" => team.franchiseid.to_s, "short_name" => team.shortname, "team_name" => team.teamname, "abbreviation" => team.abbreviation, "link" => team.link}
+    {
+      "team_id" => team.id.to_s,
+      "franchise_id" => team.franchiseid.to_s,
+      "short_name" => team.shortname, "team_name" => team.teamname,
+      "abbreviation" => team.abbreviation,
+      "link" => team.link
+    }
   end
 
   def best_season(team_id)
@@ -41,7 +47,7 @@ module TeamStats
     focus = find_team(team_id)
     teams = @teams - [focus]
     teams.max_by {|team|
-       focus.win_percentage_versus(team.id)}.teamname
+    focus.win_percentage_versus(team.id)}.teamname
   end
 
   def rival(team_id)
@@ -55,7 +61,7 @@ module TeamStats
     team.games.max_by do |game|
       our_goals = team.our_stats_in_game(game, team.id).goals
       their_goals = game.score - our_goals
-      our_goals - their_goals
+    our_goals - their_goals
     end.score_differential
   end
 
@@ -72,7 +78,6 @@ module TeamStats
     hash = {}
     focus = find_team(team_id)
     teams = @teams - [focus]
-
     teams.each do |team|
       hash[team.teamname] = focus.win_percentage_versus(team.id)
     end
