@@ -29,13 +29,10 @@ module SeasonStats
       game.game_id.to_s[0..3] == season_id[0..3]
     end
 
-    hash = {}
+    hash = Hash.new {|hash, key| hash[key] = []}
+
     game_teams.each do |game|
-      if hash.keys.include?(game.head_coach)
-        hash[game.head_coach] << game.won
-      else
-        hash[game.head_coach] = [game.won]
-      end
+      hash[game.head_coach] << game.won
     end
 
     hash.transform_values! do |value|
@@ -53,13 +50,10 @@ module SeasonStats
       game.game_id.to_s[0..3] == season_id[0..3]
     end
 
-    hash = {}
+    hash = Hash.new {|hash, key| hash[key] = []}
+
     game_teams.each do |game|
-      if hash.keys.include?(game.head_coach)
-        hash[game.head_coach] << game.won
-      else
-        hash[game.head_coach] = [game.won]
-      end
+      hash[game.head_coach] << game.won
     end
 
     hash.transform_values! do |value|
