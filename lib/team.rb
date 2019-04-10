@@ -38,8 +38,6 @@ class Team
     end
   end
 
-  ##NO TESTS##
-
   def number_of_home_games
     @games.count{|game| game.home_team_id == @id}
   end
@@ -72,6 +70,8 @@ class Team
     win_count.fdiv(rival_games.size).round(2)
   end
 
-
+  def coach_by_season(season_id)
+    @seasons.find {|season| season.id.to_s == season_id}.coach_name
+  end
 
 end

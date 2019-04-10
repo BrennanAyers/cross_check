@@ -41,17 +41,19 @@ class Season
   def shot_accuracy
     shots = games.sum {|game| our_stats_in_game(game, @team_id).shots}
     goals = games.sum {|game| our_stats_in_game(game, @team_id).goals}
-    goals.fdiv(shots).round(2)
+    goals.fdiv(shots)
   end
 
   def number_of_hits
     games.sum {|game| our_stats_in_game(game, @team_id).hits}
   end
 
-  def power_play_goal_percentage
-    power_play_goals = games.sum {|game| our_stats_in_game(game, @team_id).powerplaygoals}
-    goals = games.sum {|game| our_stats_in_game(game, @team_id).goals}
-    power_play_goals.fdiv(goals).round(2)
+  def all_goals
+    games.sum {|game| our_stats_in_game(game, @team_id).goals}
+  end
+
+  def power_play_goals
+    games.sum {|game| our_stats_in_game(game, @team_id).powerplaygoals}
   end
 
   def regular_season_goals
@@ -86,6 +88,10 @@ class Season
   def post_season_average_goals_against
     avg = post_season_goals_against.fdiv(post_season_games.length).round(2)
     avg.nan? ? 0.0 : avg
+  end
+
+  def coach_name
+    our_stats_in_game(games.first, @team_id).head_coach
   end
 
 end

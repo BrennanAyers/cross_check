@@ -28,7 +28,17 @@ class StatTrackerTest < Minitest::Test
 
     @stat_tracker_medium = StatTracker.from_csv(medium_locations)
 
+    season_game_path       = './data/sample/season_game_sample.csv'
+    season_team_path       = './data/sample/team_info_sample.csv'
+    season_game_teams_path = './data/sample/medium_game_teams_stats_sample.csv'
 
+    season_locations = {
+      games: season_game_path,
+      teams: season_team_path,
+      game_teams: season_game_teams_path
+    }
+
+    @stat_tracker_season = StatTracker.from_csv(season_locations)
   end
 
   def test_it_exists
@@ -242,4 +252,41 @@ class StatTrackerTest < Minitest::Test
 
     assert_equal expected, @stat_tracker_medium.seasonal_summary("6")
   end
+
+  def test_returns_biggest_bust
+    assert_equal "Capitals", @stat_tracker_season.biggest_bust("20152016")
+  end
+
+  def test_returns_biggest_surprise
+    assert_equal "Rangers", @stat_tracker_season.biggest_surprise("20152016")
+  end
+
+  def test_returns_winningest_coach
+    assert_equal "Claude Julien", @stat_tracker_season.winningest_coach("20152016")
+  end
+
+  def test_returns_worst_coach
+    assert_equal "John Tortorella", @stat_tracker_season.worst_coach("20152016")
+  end
+
+  def test_returns_most_accurate_team
+    assert_equal "Capitals", @stat_tracker_season.most_accurate_team("20152016")
+  end
+
+  def test_returns_least_accurate_team
+    assert_equal "Flyers", @stat_tracker_season.least_accurate_team("20152016")
+  end
+
+  def test_returns_most_hits
+    assert_equal "Rangers", @stat_tracker_season.most_hits("20152016")
+  end
+
+  def test_returns_fewest_hits
+    assert_equal "Bruins", @stat_tracker_season.fewest_hits("20152016")
+  end
+
+  def test_returns_power_play_goal_percentage
+    assert_equal 0.27, @stat_tracker_season.power_play_goal_percentage("20152016")
+  end
+
 end
