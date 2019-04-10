@@ -9,8 +9,7 @@ class Game
               :home_goals,
               :outcome,
               :score,
-              :team_stats,
-              :total_goals
+              :team_stats
 
   def initialize(info)
     @id = info[:game_id]
@@ -45,6 +44,10 @@ class Game
   def goals_for_team(id)
     return @away_goals if id == @away_team_id
     return @home_goals if id == @home_team_id
+  end
+
+  def goals_for_rival_team(id)
+    score - goals_for_team(id)
   end
 
 end

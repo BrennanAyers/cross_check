@@ -57,19 +57,19 @@ class Season
   end
 
   def regular_season_goals
-    regular_season_games.sum {|game| our_stats_in_game(game, @team_id).goals}
+    regular_season_games.sum {|game| game.goals_for_team(@team_id)}
   end
 
   def post_season_goals
-    post_season_games.sum {|game| our_stats_in_game(game, @team_id).goals}
+    post_season_games.sum {|game| game.goals_for_team(@team_id)}
   end
 
   def regular_season_goals_against
-    regular_season_games.sum {|game| rival_stats_in_game(game, @team_id).goals}
+    regular_season_games.sum {|game| game.goals_for_rival_team(@team_id)}
   end
 
   def post_season_goals_against
-    post_season_games.sum {|game| rival_stats_in_game(game, @team_id).goals}
+    post_season_games.sum {|game| game.goals_for_rival_team(@team_id)}
   end
 
   def regular_season_average_goals

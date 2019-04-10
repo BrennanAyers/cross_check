@@ -50,4 +50,8 @@ class GameTest < Minitest::Test
     assert_equal 3, @game.goals_for_team(6)
   end
 
+  def test_returns_rival_team_goals
+    assert_equal 2, @game.goals_for_rival_team(6)
+  end
+
 end
