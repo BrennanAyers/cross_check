@@ -34,9 +34,6 @@ class StatTracker
     end
   end
 
-
-
-
   def generate_teams(teams_table)
     @teams = teams_table.map{|team_info| Team.new(team_info)}
     @teams.each do |team|
@@ -104,8 +101,7 @@ class StatTracker
 
   def best_offense
     best_team = @teams.max_by do |team|
-      team_goals = team.games.map{|game|(team.our_stats_in_game(game, team.id).goals)}
-      team_goals.sum.fdiv(team.games.count)
+      team.games.map{|game|game.goals_for_team(team.id)}.sum.fdiv(team.games.count)
     end
     best_team.teamname
   end
@@ -362,14 +358,9 @@ class StatTracker
 
   def most_accurate_team(season_id)
     teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
-    teams.min_by do |team|
+    teams.max_by do |team|
       focus = team.seasons.find {|season| season.id.to_s == season_id}
-      focus.goals.fdiv(focus.shots)
-    end
+      focus.shot_accuracy
+    end.teamname
   end
-
-  def least_accurate_team(season_id)
-
-  end
-
 end
