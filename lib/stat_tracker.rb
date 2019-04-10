@@ -380,7 +380,7 @@ class StatTracker
       end.teamname
     end
 
-  def least_hits(season_id)
+  def fewest_hits(season_id)
       teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
       teams.min_by do |team|
         focus = team.seasons.find {|season| season.id.to_s == season_id}
@@ -388,4 +388,16 @@ class StatTracker
       end.teamname
     end
 
+    def power_play_goal_percentage(season_id)
+      teams = @teams.select {|team| team.seasons.any? {|season| season.id.to_s == season_id}}
+      # @teams.map(&:season)
+      power_play_goals = 0
+      all_goals = 0
+      teams.each do |team|
+        focus = team.seasons.find {|season| season.id.to_s == season_id}
+        power_play_goals += focus.power_play_goals
+        all_goals += focus.all_goals
+      end
+      power_play_goals.fdiv(all_goals).round(2)
+    end
 end

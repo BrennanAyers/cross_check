@@ -281,8 +281,12 @@ class StatTrackerTest < Minitest::Test
     assert_equal "Rangers", @stat_tracker_season.most_hits("20152016")
   end
 
-  def test_returns_least_hits
-    assert_equal "Bruins", @stat_tracker_season.least_hits("20152016")
+  def test_returns_fewest_hits
+    assert_equal "Bruins", @stat_tracker_season.fewest_hits("20152016")
+  end
+
+  def test_returns_power_play_goal_percentage
+    assert_equal 0.27, @stat_tracker_season.power_play_goal_percentage("20152016")
   end
 
 end
