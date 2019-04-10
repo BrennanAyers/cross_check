@@ -61,8 +61,12 @@ class SeasonTest < MiniTest::Test
     assert_equal 25, @season.number_of_hits
   end
 
-  def test_returns_power_play_goal_percentage
-    assert_equal 0.05, @season.power_play_goal_percentage
+  def test_returns_all_goals
+    assert_equal 20, @season.all_goals
+  end
+
+  def test_returns_power_play_goals
+    assert_equal 1, @season.power_play_goals
   end
 
   def test_returns_regular_season_goals_total

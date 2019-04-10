@@ -48,10 +48,12 @@ class Season
     games.sum {|game| our_stats_in_game(game, @team_id).hits}
   end
 
-  def power_play_goal_percentage
-    power_play_goals = games.sum {|game| our_stats_in_game(game, @team_id).powerplaygoals}
-    goals = games.sum {|game| our_stats_in_game(game, @team_id).goals}
-    power_play_goals.fdiv(goals).round(2)
+  def all_goals
+    games.sum {|game| our_stats_in_game(game, @team_id).goals}
+  end
+
+  def power_play_goals
+    games.sum {|game| our_stats_in_game(game, @team_id).powerplaygoals}
   end
 
   def regular_season_goals
